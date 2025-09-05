@@ -16,10 +16,15 @@
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
     <link href="assets/css/colors/scheme-01.css" rel="stylesheet" type="text/css">
     <link href="assets/css/academy.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/animations.css" rel="stylesheet" type="text/css">
 </head>
 
 <body class="dark-scheme">
     <div id="wrapper">
+        <!-- page preloader begin -->
+        <div id="de-loader"></div>
+        <!-- page preloader close -->
+
         <!-- Header -->
         <header class="transparent">
             <div class="container">
@@ -207,7 +212,7 @@
                 <div class="row g-4">
                     <!-- Klinik -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="card bg-dark-2 border-0">
+                        <div class="card bg-dark-2 border-0 hover">
                             <div class="card-body p-4">
                                 <div class="d-flex align-items-center mb-3">
                                     <span class="badge bg-warning-600 me-3">Upcoming</span>
@@ -221,7 +226,7 @@
 
                     <!-- Mentoring -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="card bg-dark-2 border-0">
+                        <div class="card bg-dark-2 border-0 hover">
                             <div class="card-body p-4">
                                 <div class="d-flex align-items-center mb-3">
                                     <span class="badge bg-warning-600 me-3">Upcoming</span>
@@ -235,7 +240,7 @@
 
                     <!-- Jam and Jazz -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="card bg-dark-2 border-0">
+                        <div class="card bg-dark-2 border-0 hover">
                             <div class="card-body p-4">
                                 <div class="d-flex align-items-center mb-3">
                                     <span class="badge bg-warning-600 me-3">Upcoming</span>
@@ -265,8 +270,8 @@
 
                     <div class="col-lg-6">
                         <div class="wow scaleIn">
-                            <div class="poster-card relative rounded-1 overflow-hidden">
-                                <img id="catz-poster" src="assets/images/placeholder-poster.jpg" class="w-100" alt="Poster for The Catz' Module">
+                            <div class="poster-card relative rounded-1 overflow-hidden hover">
+                                <img id="catz-poster" src="assets/images/placeholder-poster.jpg" class="w-100 hover-scale-1-1" alt="Poster for The Catz' Module">
                                 <div class="abs w-100 h-100 start-0 top-0 bg-dark-50 d-flex align-items-center justify-content-center">
                                     <div class="text-center">
                                         <h4 class="text-white mb-3">The Catz' Module</h4>
@@ -329,6 +334,7 @@
     <script src="assets/js/vendors.js"></script>
     <script src="assets/js/designesia.js"></script>
     <script src="assets/js/supabase.js"></script>
+    <script src="assets/js/animations.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
 </html>

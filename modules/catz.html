@@ -13,10 +13,15 @@
     <link href="../../assets/css/style.css" rel="stylesheet" type="text/css">
     <link href="../../assets/css/colors/scheme-01.css" rel="stylesheet" type="text/css">
     <link href="../../assets/css/academy.css" rel="stylesheet" type="text/css">
+    <link href="../../assets/css/animations.css" rel="stylesheet" type="text/css">
 </head>
 
 <body class="dark-scheme">
     <div id="wrapper">
+        <!-- page preloader begin -->
+        <div id="de-loader"></div>
+        <!-- page preloader close -->
+
         <!-- Header -->
         <header class="transparent">
             <div class="container">
@@ -65,20 +70,26 @@
                     <div class="col-lg-6">
                         <div class="me-lg-5 pe-lg-5">
                             <div class="subtitle wow fadeInUp" data-wow-delay=".2s">Featured Module</div>
-                            <h1 class="wow fadeInUp" data-wow-delay=".4s">The Catz' Module</h1>
+                            <h1 class="wow fadeInUp" data-wow-delay=".4s text-gradient">The Catz' Module</h1>
                             <p class="lead wow fadeInUp" data-wow-delay=".6s">A growing PDF-based module series inspired by The Real ITBJazz Book.</p>
                             <div class="mt-4 wow fadeInUp" data-wow-delay=".8s">
-                                <span class="badge bg-main-600 me-2">Published</span>
-                                <span class="badge bg-secondary me-2">PDF Series</span>
-                                <span class="badge bg-info">Inspired by The Real ITBJazz Book</span>
+                                <span class="badge bg-success me-2">Published</span>
+                                <span class="badge bg-info me-2">PDF Series</span>
+                                <span class="badge bg-warning-600">Inspired by The Real ITBJazz Book</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-6">
                         <div class="wow scaleIn">
-                            <div class="poster-card relative rounded-1 overflow-hidden">
-                                <img id="catz-poster-detail" src="../../assets/images/placeholder-poster.jpg" class="w-100" alt="Poster for The Catz' Module">
+                            <div class="poster-card relative rounded-1 overflow-hidden hover">
+                                <img id="catz-poster-detail" src="../../assets/images/placeholder-poster.jpg" class="w-100 hover-scale-1-1" alt="Poster for The Catz' Module">
+                                <div class="abs w-100 h-100 start-0 top-0 bg-dark-50 d-flex align-items-center justify-content-center">
+                                    <div class="text-center">
+                                        <h4 class="text-white mb-3">The Catz' Module</h4>
+                                        <p class="text-white-50">Coming Soon</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -93,7 +104,7 @@
                     <div class="col-lg-8">
                         <div class="card bg-dark-2 border-0">
                             <div class="card-body p-5">
-                                <h3 class="mb-4">About This Module</h3>
+                                <h3 class="mb-4 text-gradient">About This Module</h3>
                                 <p class="lead">The Catz' Module is a comprehensive learning series designed to enhance your understanding of jazz music through structured, PDF-based content.</p>
                                 
                                 <h4 class="mt-5 mb-3">What You'll Learn</h4>
@@ -109,17 +120,49 @@
                                 <p>This module is designed as a progressive learning experience with multiple chapters, each building upon the previous one. The content is carefully curated to provide both theoretical knowledge and practical application.</p>
 
                                 <div class="alert alert-info mt-4">
-                                    <h5 class="alert-heading">Coming Soon</h5>
+                                    <h5 class="alert-heading">
+                                        <i class="fa fa-info-circle me-2"></i>Coming Soon
+                                    </h5>
                                     <p class="mb-0">The PDF viewer and detailed content will be available soon. This module is currently in development and will be released in phases.</p>
+                                </div>
+
+                                <div class="mt-4">
+                                    <h5 class="mb-3">Learning Objectives</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fa fa-check-circle text-success me-3"></i>
+                                                <span>Master basic jazz theory</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fa fa-check-circle text-success me-3"></i>
+                                                <span>Learn essential standards</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fa fa-check-circle text-success me-3"></i>
+                                                <span>Develop improvisation skills</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fa fa-check-circle text-success me-3"></i>
+                                                <span>Understand rhythm concepts</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
-                        <div class="card bg-dark-2 border-0">
+                        <div class="card bg-dark-2 border-0 sticky-top">
                             <div class="card-body p-4">
-                                <h5 class="mb-3">Module Details</h5>
+                                <h5 class="mb-3 text-gradient">Module Details</h5>
                                 <div class="mb-3">
                                     <strong>Status:</strong> <span class="badge bg-success">Published</span>
                                 </div>
@@ -141,21 +184,76 @@
                                 <h6 class="mb-3">Related Resources</h6>
                                 <ul class="list-unstyled">
                                     <li class="mb-2">
-                                        <a href="#" class="text-light hover-text-main-600">
+                                        <a href="#" class="text-light hover-text-main-600 d-flex align-items-center">
                                             <i class="fa fa-book me-2"></i>The Real ITBJazz Book
                                         </a>
                                     </li>
                                     <li class="mb-2">
-                                        <a href="../../events/klinik.html" class="text-light hover-text-main-600">
+                                        <a href="../../events/klinik.html" class="text-light hover-text-main-600 d-flex align-items-center">
                                             <i class="fa fa-calendar me-2"></i>Kocheng Klinik Sessions
                                         </a>
                                     </li>
                                     <li class="mb-2">
-                                        <a href="../../events/mentoring.html" class="text-light hover-text-main-600">
+                                        <a href="../../events/mentoring.html" class="text-light hover-text-main-600 d-flex align-items-center">
                                             <i class="fa fa-users me-2"></i>Mentoring Program
                                         </a>
                                     </li>
                                 </ul>
+
+                                <hr class="my-4">
+
+                                <div class="text-center">
+                                    <a href="index.html" class="btn btn-outline-light w-100 mb-2">
+                                        <i class="fa fa-arrow-left me-2"></i>Back to Modules
+                                    </a>
+                                    <a href="../../index.html" class="btn btn-main w-100">
+                                        <i class="fa fa-home me-2"></i>Back to Home
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Section -->
+        <section class="bg-dark section-dark text-light">
+            <div class="container">
+                <div class="row g-4 justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <div class="card bg-dark-2 border-0">
+                            <div class="card-body p-5">
+                                <h3 class="mb-4 text-gradient">Development Progress</h3>
+                                <div class="row g-4">
+                                    <div class="col-md-4">
+                                        <div class="text-center">
+                                            <div class="progress-circle mb-3">
+                                                <div class="progress-value">75%</div>
+                                            </div>
+                                            <h6>Content Creation</h6>
+                                            <small class="text-muted">PDF content being developed</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="text-center">
+                                            <div class="progress-circle mb-3">
+                                                <div class="progress-value">50%</div>
+                                            </div>
+                                            <h6>Interactive Features</h6>
+                                            <small class="text-muted">PDF viewer integration</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="text-center">
+                                            <div class="progress-circle mb-3">
+                                                <div class="progress-value">90%</div>
+                                            </div>
+                                            <h6>Testing & Review</h6>
+                                            <small class="text-muted">Quality assurance</small>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -212,6 +310,49 @@
     <script src="../../assets/js/vendors.js"></script>
     <script src="../../assets/js/designesia.js"></script>
     <script src="../../assets/js/supabase.js"></script>
+    <script src="../../assets/js/animations.js"></script>
     <script src="../../assets/js/main.js"></script>
+
+    <!-- Enhanced CSS for Catz Module -->
+    <style>
+        .progress-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: conic-gradient(var(--brand-primary) 0deg, var(--brand-primary) 270deg, var(--bg-dark-3) 270deg, var(--bg-dark-3) 360deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .progress-circle::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: var(--bg-dark-2);
+            border-radius: 50%;
+        }
+        
+        .progress-value {
+            position: relative;
+            z-index: 1;
+            font-weight: bold;
+            color: var(--brand-primary);
+        }
+        
+        .sticky-top {
+            top: 100px;
+        }
+        
+        .text-gradient {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
 </body>
 </html>
