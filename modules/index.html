@@ -7,183 +7,854 @@
     <meta name="description" content="Browse our collection of learning modules including The Catz' Module and more.">
     <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
     
-    <!-- CSS Files -->
-    <link href="../assets/css/style-simple.css" rel="stylesheet" type="text/css">
-    <link href="../assets/css/academy.css" rel="stylesheet" type="text/css">
-    <link href="../assets/css/animations.css" rel="stylesheet" type="text/css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Light Theme Colors */
+            --primary-color: #2563eb;
+            --primary-light: #3b82f6;
+            --secondary-color: #10b981;
+            --accent-color: #f59e0b;
+            --accent-pink: #ec4899;
+            --accent-purple: #8b5cf6;
+            
+            /* Neutral Colors */
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            
+            /* Background Colors */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-tertiary: #f3f4f6;
+            
+            /* Text Colors */
+            --text-primary: #111827;
+            --text-secondary: #4b5563;
+            --text-muted: #6b7280;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #2563eb, #3b82f6);
+            --gradient-secondary: linear-gradient(135deg, #10b981, #34d399);
+            --gradient-accent: linear-gradient(135deg, #f59e0b, #fbbf24);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        h1 { font-size: 3.5rem; font-weight: 700; }
+        h2 { font-size: 2.5rem; font-weight: 600; }
+        h3 { font-size: 2rem; font-weight: 600; }
+        h4 { font-size: 1.5rem; font-weight: 500; }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .lead {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -0.75rem;
+        }
+
+        .col-lg-3, .col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12 {
+            padding: 0 0.75rem;
+            flex: 1;
+        }
+
+        .col-lg-3 { flex: 0 0 25%; }
+        .col-lg-4 { flex: 0 0 33.333%; }
+        .col-lg-6 { flex: 0 0 50%; }
+        .col-lg-8 { flex: 0 0 66.666%; }
+        .col-lg-12 { flex: 0 0 100%; }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-menu li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu li a:hover::after,
+        .nav-menu li a.active::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--white);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: var(--white);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--gray-300);
+        }
+
+        .btn-outline:hover {
+            background: var(--gray-50);
+            color: var(--text-primary);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 8rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header h1 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-header .lead {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Search and Filter */
+        .search-filter {
+            background: var(--white);
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .search-container {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 300px;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--gray-300);
+            background: var(--white);
+            color: var(--text-secondary);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            border: 1px solid var(--gray-200);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-primary {
+            background: var(--gradient-primary);
+            color: var(--white);
+        }
+
+        .badge-secondary {
+            background: var(--gradient-secondary);
+            color: var(--white);
+        }
+
+        .badge-accent {
+            background: var(--gradient-accent);
+            color: var(--white);
+        }
+
+        .badge-pink {
+            background: linear-gradient(135deg, #ec4899, #f472b6);
+            color: var(--white);
+        }
+
+        .badge-purple {
+            background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+            color: var(--white);
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-light {
+            background: var(--bg-primary);
+        }
+
+        .section-gray {
+            background: var(--bg-secondary);
+        }
+
+        /* Grid Layouts */
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        /* Utilities */
+        .text-center { text-align: center; }
+        .d-flex { display: flex; }
+        .align-items-center { align-items: center; }
+        .justify-content-center { justify-content: center; }
+        .justify-content-between { justify-content: space-between; }
+        .w-100 { width: 100%; }
+        .mb-0 { margin-bottom: 0; }
+        .mb-3 { margin-bottom: 1rem; }
+        .mb-4 { margin-bottom: 1.5rem; }
+        .mb-5 { margin-bottom: 3rem; }
+        .mt-3 { margin-top: 1rem; }
+        .mt-4 { margin-top: 1.5rem; }
+        .mt-5 { margin-top: 3rem; }
+
+        /* Footer */
+        footer {
+            background: var(--gray-900);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--gray-300);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--gray-700);
+            padding-top: 1rem;
+            text-align: center;
+            color: var(--gray-400);
+        }
+
+        /* Social Icons */
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--gray-800);
+            color: var(--gray-300);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .col-lg-3, .col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12 {
+                flex: 0 0 100%;
+            }
+            
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.75rem; }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+            
+            .page-header {
+                padding: 6rem 0 3rem;
+            }
+            
+            .search-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-input {
+                min-width: auto;
+            }
+            
+            .card-body {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Hover Effects */
+        .hover-lift {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Loading States */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--gray-200);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 
-<body class="dark-scheme">
-    <div id="wrapper">
-        <!-- page preloader begin -->
-        <div id="de-loader"></div>
-        <!-- page preloader close -->
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/images/logo.svg" alt="academy.itbjazz">
+                    <span class="logo-text">academy.itbjazz</span>
+                </a>
+                
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="index.html" class="active">Modules</a></li>
+                        <li><a href="../events/klinik.html">Klinik</a></li>
+                        <li><a href="../events/mentoring.html">Mentoring</a></li>
+                        <li><a href="../events/jam-and-jazz.html">Jam & Jazz</a></li>
+                        <li><a href="../about.html">About</a></li>
+                    </ul>
+                </nav>
+                
+                <a href="../index.html" class="btn btn-primary">Back to Home</a>
+            </div>
+        </div>
+    </header>
 
-        <!-- Header -->
-        <header class="transparent">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="de-flex">
-                            <div class="de-flex-col">
-                                <div id="logo">
-                                    <a href="../index.html">
-                                        <img class="logo-main" src="../assets/images/logo.svg" alt="academy.itbjazz">
-                                        <img class="logo-scroll" src="../assets/images/logo.svg" alt="academy.itbjazz">
-                                        <img class="logo-mobile" src="../assets/images/logo.svg" alt="academy.itbjazz">
-                                    </a>
-                                </div>
-                            </div>
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1>Learning Modules</h1>
+                <p class="lead">Explore our collection of structured learning modules designed to enhance your musical journey</p>
+            </div>
+        </div>
+    </section>
 
-                            <div class="de-flex-col">
-                                <div class="de-flex-col header-col-mid">
-                                    <ul id="mainmenu">
-                                        <li><a class="menu-item" href="../index.html">Home</a></li>
-                                        <li><a class="menu-item active" href="index.html">Modules</a></li>
-                                        <li><a class="menu-item" href="../events/klinik.html">Klinik</a></li>
-                                        <li><a class="menu-item" href="../events/mentoring.html">Mentoring</a></li>
-                                        <li><a class="menu-item" href="../events/jam-and-jazz.html">Jam & Jazz</a></li>
-                                        <li><a class="menu-item" href="../about.html">About</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+    <!-- Search and Filter -->
+    <section class="search-filter">
+        <div class="container">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search modules..." id="searchInput">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="published">Published</button>
+                    <button class="filter-btn" data-filter="draft">Draft</button>
+                    <button class="filter-btn" data-filter="featured">Featured</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                            <div class="de-flex-col">
-                                <a class="btn-main fx-slide w-100" href="../index.html"><span>Back to Home</span></a>
-                                <div class="menu_side_area">
-                                    <span id="menu-btn"></span>
-                                </div>
-                            </div>
+    <!-- Modules Grid -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="grid grid-3" id="modules-grid">
+                <!-- Featured Module -->
+                <div class="card hover-lift animate-fade-in" data-category="featured published">
+                    <div class="card-body">
+                        <div class="badge badge-primary mb-3">Featured</div>
+                        <h4>The Catz' Module</h4>
+                        <p>A growing PDF-based module series inspired by The Real ITBJazz Book. Perfect for intermediate learners looking to deepen their understanding of jazz theory and practice.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <small style="color: var(--text-muted);">Published</small>
+                            <a href="catz.html" class="btn btn-outline">View Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coming Soon Module -->
+                <div class="card hover-lift animate-fade-in" data-category="draft">
+                    <div class="card-body">
+                        <div class="badge badge-secondary mb-3">Coming Soon</div>
+                        <h4>Jazz Fundamentals</h4>
+                        <p>Master the basics of jazz theory, harmony, and improvisation. This comprehensive module covers everything from scales to advanced chord progressions.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <small style="color: var(--text-muted);">Draft</small>
+                            <a href="#" class="btn btn-outline">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced Module -->
+                <div class="card hover-lift animate-fade-in" data-category="published">
+                    <div class="card-body">
+                        <div class="badge badge-accent mb-3">Advanced</div>
+                        <h4>Performance Techniques</h4>
+                        <p>Advanced techniques for jazz performance, including stage presence, audience engagement, and professional development for aspiring jazz musicians.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <small style="color: var(--text-muted);">Published</small>
+                            <a href="#" class="btn btn-outline">Explore</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Beginner Module -->
+                <div class="card hover-lift animate-fade-in" data-category="published">
+                    <div class="card-body">
+                        <div class="badge badge-pink mb-3">Beginner</div>
+                        <h4>Introduction to Jazz</h4>
+                        <p>Start your jazz journey with this comprehensive introduction covering the history, styles, and basic concepts of jazz music.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <small style="color: var(--text-muted);">Published</small>
+                            <a href="#" class="btn btn-outline">Start Learning</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Intermediate Module -->
+                <div class="card hover-lift animate-fade-in" data-category="published">
+                    <div class="card-body">
+                        <div class="badge badge-purple mb-3">Intermediate</div>
+                        <h4>Harmony & Theory</h4>
+                        <p>Deep dive into jazz harmony, chord progressions, and theoretical concepts that form the foundation of jazz improvisation.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <small style="color: var(--text-muted);">Published</small>
+                            <a href="#" class="btn btn-outline">Study Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Workshop Module -->
+                <div class="card hover-lift animate-fade-in" data-category="draft">
+                    <div class="card-body">
+                        <div class="badge badge-accent mb-3">Workshop</div>
+                        <h4>Jazz Workshop Series</h4>
+                        <p>Interactive workshop modules covering specific topics like blues, bebop, modal jazz, and contemporary styles.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <small style="color: var(--text-muted);">Draft</small>
+                            <a href="#" class="btn btn-outline">Coming Soon</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
+    </section>
 
-        <!-- Page Header -->
-        <section class="bg-dark section-dark text-light pt-80">
-            <div class="container">
-                <div class="row g-4 justify-content-center">
-                    <div class="col-lg-8 text-center">
-                        <div class="subtitle wow fadeInUp" data-wow-delay=".0s">Learning Library</div>
-                        <h1 class="wow fadeInUp" data-wow-delay=".2s">Modules</h1>
-                        <p class="lead wow fadeInUp" data-wow-delay=".4s">Explore our collection of structured learning modules designed to enhance your musical journey.</p>
-                    </div>
+    <!-- CTA Section -->
+    <section class="section section-gray">
+        <div class="container">
+            <div class="text-center">
+                <h2>Can't Find What You're Looking For?</h2>
+                <p class="lead mb-4">New modules are added regularly. Check back soon or contact us for specific learning resources.</p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="../index.html" class="btn btn-primary">Back to Home</a>
+                    <a href="../about.html" class="btn btn-secondary">Contact Us</a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Search and Filter Section -->
-        <section class="bg-dark section-dark text-light">
-            <div class="container">
-                <div class="row g-4">
-                    <div class="col-lg-8">
-                        <div class="search-container">
-                            <div class="position-relative">
-                                <input type="text" class="form-control search-input" placeholder="Search modules..." id="searchInput">
-                                <i class="fa fa-search position-absolute" style="right: 20px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="filter-container d-flex gap-2">
-                            <button class="filter-btn active" data-filter="all">All</button>
-                            <button class="filter-btn" data-filter="published">Published</button>
-                            <button class="filter-btn" data-filter="draft">Draft</button>
-                        </div>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>academy.itbjazz</h3>
+                    <p>A living catalogue of programs, modules, and community projects designed to enhance your musical journey.</p>
+                    <div class="social-icons mt-3">
+                        <a href="#">📘</a>
+                        <a href="#">📷</a>
+                        <a href="#">🐦</a>
+                        <a href="#">📺</a>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Modules Grid -->
-        <section class="bg-dark section-dark text-light">
-            <div class="container">
-                <div class="row g-4" id="modules-grid">
-                    <!-- Modules will be loaded dynamically from Supabase -->
-                    <div class="col-12 text-center">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Loading modules...</span>
-                        </div>
-                    </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="index.html">Modules</a></p>
+                    <p><a href="../events/klinik.html">Klinik</a></p>
+                    <p><a href="../events/mentoring.html">Mentoring</a></p>
+                    <p><a href="../events/jam-and-jazz.html">Jam & Jazz</a></p>
+                    <p><a href="../about.html">About</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <p><a href="#">Learning Materials</a></p>
+                    <p><a href="#">Community Guidelines</a></p>
+                    <p><a href="#">Support</a></p>
+                    <p><a href="#">Contact Us</a></p>
                 </div>
             </div>
-        </section>
-
-        <!-- Call to Action Section -->
-        <section class="bg-dark section-dark text-light">
-            <div class="container">
-                <div class="row g-4 justify-content-center">
-                    <div class="col-lg-8 text-center">
-                        <div class="card bg-dark-2 border-0">
-                            <div class="card-body p-5">
-                                <h3 class="mb-4 text-gradient">Can't Find What You're Looking For?</h3>
-                                <p class="lead mb-4">New modules are added regularly. Check back soon or contact us for specific learning resources.</p>
-                                <div class="d-flex gap-3 justify-content-center">
-                                    <a href="../index.html" class="btn btn-main">
-                                        <i class="fa fa-home me-2"></i>Back to Home
-                                    </a>
-                                    <a href="../about.html" class="btn btn-outline-light">
-                                        <i class="fa fa-envelope me-2"></i>Contact Us
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 academy.itbjazz. All rights reserved.</p>
             </div>
-        </section>
+        </div>
+    </footer>
 
-        <!-- Footer -->
-        <footer class="text-light section-dark">
-            <div class="container">
-                <div class="row g-4 align-items-center">
-                    <div class="col-md-12">
-                        <div class="d-lg-flex align-items-center justify-content-between text-center">
-                            <div>
-                                <h3 class="fs-20">ITBJazz Academy</h3>
-                                A living catalogue of programs, modules, and community projects
-                            </div>
-                            <div>
-                                <img src="../assets/images/logo.svg" class="w-150px" alt="academy.itbjazz">
-                                <div class="social-icons mb-sm-30 mt-4">
-                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="fs-20">Quick Links</h3>
-                                <div class="d-flex flex-column">
-                                    <a href="../about.html" class="text-light mb-2">About</a>
-                                    <a href="index.html" class="text-light mb-2">Modules</a>
-                                    <a href="../events/klinik.html" class="text-light mb-2">Klinik</a>
-                                    <a href="../events/mentoring.html" class="text-light mb-2">Mentoring</a>
-                                    <a href="../events/jam-and-jazz.html" class="text-light mb-2">Jam & Jazz</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="subfooter">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            Copyright 2025 - academy.itbjazz
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const modules = document.querySelectorAll('.card[data-category]');
 
-    <!-- Javascript Files -->
-    <script type="module" src="../assets/js/vendors.js"></script>
-    <script type="module" src="../assets/js/designesia.js"></script>
-    <script type="module" src="../assets/js/supabase.js"></script>
-    <script type="module" src="../assets/js/animations.js"></script>
-    <script type="module" src="../assets/js/modules.js"></script>
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            filterModules(searchTerm, getActiveFilter());
+        });
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Filter modules
+                filterModules(searchInput.value.toLowerCase(), this.dataset.filter);
+            });
+        });
+
+        function getActiveFilter() {
+            const activeButton = document.querySelector('.filter-btn.active');
+            return activeButton ? activeButton.dataset.filter : 'all';
+        }
+
+        function filterModules(searchTerm, filter) {
+            modules.forEach(module => {
+                const title = module.querySelector('h4').textContent.toLowerCase();
+                const description = module.querySelector('p').textContent.toLowerCase();
+                const category = module.dataset.category;
+                
+                const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+                const matchesFilter = filter === 'all' || category.includes(filter);
+                
+                if (matchesSearch && matchesFilter) {
+                    module.style.display = 'block';
+                    module.classList.add('animate-fade-in');
+                } else {
+                    module.style.display = 'none';
+                }
+            });
+        }
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 1px 2px 0 rgba(0, 0, 0, 0.05)';
+            }
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>

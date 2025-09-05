@@ -6,8 +6,7 @@ export default defineConfig({
     assetsDir: 'assets',
     rollupOptions: {
       input: {
-        main: 'index.html',
-        modules: 'modules/index.html'
+        main: 'index.html'
       }
     }
   },

@@ -5,333 +5,287 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>academy.itbjazz — Programs, Modules, and Events</title>
     <meta name="description" content="ITBJazz Academy: a living catalogue of programs, modules (The Catz' Module), and community events (Kocheng Klinik, Mentoring, Jam and Jazz).">
-    <meta property="og:title" content="academy.itbjazz">
-    <meta property="og:description" content="Programs, modules, and community events.">
-    <meta property="og:type" content="website">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- CSS Files -->
-    <link href="assets/css/style-simple.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/academy.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/animations.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css">
 </head>
 
-<body class="dark-scheme">
-    <div id="wrapper">
-        <!-- page preloader begin -->
-        <div id="de-loader"></div>
-        <!-- page preloader close -->
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.svg" alt="academy.itbjazz">
+                    <span class="logo-text">academy.itbjazz</span>
+                </a>
+                
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="#home" class="active">Home</a></li>
+                        <li><a href="modules/index.html">Modules</a></li>
+                        <li><a href="events/klinik.html">Klinik</a></li>
+                        <li><a href="events/mentoring.html">Mentoring</a></li>
+                        <li><a href="events/jam-and-jazz.html">Jam & Jazz</a></li>
+                        <li><a href="about.html">About</a></li>
+                    </ul>
+                </nav>
+                
+                <a href="modules/index.html" class="btn btn-primary">View Modules</a>
+            </div>
+        </div>
+    </header>
 
-        <!-- Header -->
-        <header class="transparent">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="de-flex">
-                            <div class="de-flex-col">
-                                <div id="logo">
-                                    <a href="index.html">
-                                        <img class="logo-main" src="assets/images/logo.svg" alt="academy.itbjazz">
-                                        <img class="logo-scroll" src="assets/images/logo.svg" alt="academy.itbjazz">
-                                        <img class="logo-mobile" src="assets/images/logo.svg" alt="academy.itbjazz">
-                                    </a>
-                                </div>
-                            </div>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>academy.itbjazz</h1>
+                <p class="lead">A living catalogue of our programs, modules, and community projects. Discover the world of jazz through structured learning and collaborative experiences.</p>
+                <div class="hero-actions">
+                    <a href="modules/index.html" class="btn btn-primary">Explore Modules</a>
+                    <a href="about.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                            <div class="de-flex-col">
-                                <div class="de-flex-col header-col-mid">
-                                    <ul id="mainmenu">
-                                        <li><a class="menu-item active" href="#section-hero">Home</a></li>
-                                        <li><a class="menu-item" href="modules/index.html">Modules</a></li>
-                                        <li><a class="menu-item" href="events/klinik.html">Klinik</a></li>
-                                        <li><a class="menu-item" href="events/mentoring.html">Mentoring</a></li>
-                                        <li><a class="menu-item" href="events/jam-and-jazz.html">Jam & Jazz</a></li>
-                                        <li><a class="menu-item" href="about.html">About</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+    <!-- Featured Modules Section -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="section-title">
+                <div class="section-subtitle">Featured Learning</div>
+                <h2>Our Learning Modules</h2>
+                <p class="lead">Structured learning experiences designed to enhance your musical journey</p>
+            </div>
+            
+            <div class="grid grid-3">
+                <div class="card hover-lift animate-fade-in">
+                    <div class="card-body">
+                        <div class="badge badge-primary mb-3">Featured</div>
+                        <h4>The Catz' Module</h4>
+                        <p>A growing PDF-based module series inspired by The Real ITBJazz Book. Perfect for intermediate learners looking to deepen their understanding of jazz theory and practice.</p>
+                        <a href="modules/catz.html" class="btn btn-outline mt-3">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="card hover-lift animate-fade-in">
+                    <div class="card-body">
+                        <div class="badge badge-secondary mb-3">Coming Soon</div>
+                        <h4>Jazz Fundamentals</h4>
+                        <p>Master the basics of jazz theory, harmony, and improvisation. This comprehensive module covers everything from scales to advanced chord progressions.</p>
+                        <a href="#" class="btn btn-outline mt-3">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="card hover-lift animate-fade-in">
+                    <div class="card-body">
+                        <div class="badge badge-accent mb-3">Advanced</div>
+                        <h4>Performance Techniques</h4>
+                        <p>Advanced techniques for jazz performance, including stage presence, audience engagement, and professional development for aspiring jazz musicians.</p>
+                        <a href="#" class="btn btn-outline mt-3">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                            <div class="de-flex-col">
-                                <a class="btn-main fx-slide w-100" href="modules/index.html"><span>View Modules</span></a>
-                                <div class="menu_side_area">
-                                    <span id="menu-btn"></span>
-                                </div>
-                            </div>
+    <!-- Objectives Section -->
+    <section class="section section-gray">
+        <div class="container">
+            <div class="section-title">
+                <div class="section-subtitle">Our Mission</div>
+                <h2>Building Musical Excellence</h2>
+                <p class="lead">Structured learning through curriculum, events, and community engagement</p>
+            </div>
+            
+            <div class="grid grid-4">
+                <div class="card hover-lift animate-fade-in">
+                    <div class="card-body text-center">
+                        <div class="badge badge-primary mb-3">Curriculum</div>
+                        <h4>Structured Learning</h4>
+                        <p>Improve members' musical skills via a structured curriculum and learning facilities.</p>
+                        <div class="mt-3">
+                            <small style="color: var(--text-muted);">Target: 80% member satisfaction</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card hover-lift animate-fade-in">
+                    <div class="card-body text-center">
+                        <div class="badge badge-secondary mb-3">Events</div>
+                        <h4>Kocheng Klinik</h4>
+                        <p>Improve members' skills through event-based learning vehicles and hands-on practice.</p>
+                        <div class="mt-3">
+                            <small style="color: var(--text-muted);">≥4 internal + ≥1 external sessions</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card hover-lift animate-fade-in">
+                    <div class="card-body text-center">
+                        <div class="badge badge-pink mb-3">Mentoring</div>
+                        <h4>Personal Guidance</h4>
+                        <p>One-on-one and group mentoring sessions for personalized skill development.</p>
+                        <div class="mt-3">
+                            <small style="color: var(--text-muted);">≥4 sessions aligned with curriculum</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card hover-lift animate-fade-in">
+                    <div class="card-body text-center">
+                        <div class="badge badge-purple mb-3">Community</div>
+                        <h4>Jam & Jazz</h4>
+                        <p>Enhance music-making experience through collaborative expression and community building.</p>
+                        <div class="mt-3">
+                            <small style="color: var(--text-muted);">≥1 event per management year</small>
                         </div>
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
+    </section>
 
-        <!-- Hero Section -->
-        <section id="section-hero" class="section-dark no-top no-bottom text-light jarallax relative mh-800" data-video-src="mp4:assets/video/2.mp4">
-            <div class="gradient-edge-top op-6 h-50 color"></div>
-            <div class="gradient-edge-bottom"></div>
-            <div class="sw-overlay op-8"></div>
-            <div class="abs abs-centered z-2 w-80">
-                <div class="container wow scaleIn" data-wow-duration="3s">
-                    <div class="row">
-                        <div class="col-lg-12 text-center">
-                            <div class="subtitle">A living catalogue of our programs</div>
-                            <h1 class="fs-120 text-uppercase fs-sm-12vw mb-4 lh-1">academy.itbjazz</h1>
-                            <p class="lead mb-4">A living catalogue of our programs, modules, and community projects.</p>
-                            
-                            <div class="spacer-single"></div>
-                            
-                            <a class="btn-main mx-2 fx-slide" href="modules/index.html"><span>View Modules</span></a>
-                            <a class="btn-main btn-line mx-2 fx-slide" href="about.html"><span>About</span></a>
-                        </div>
+    <!-- Upcoming Events Section -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="section-title">
+                <div class="section-subtitle">What's Next</div>
+                <h2>Upcoming Events</h2>
+                <p class="lead">Join our community events and learning sessions</p>
+            </div>
+            
+            <div class="grid grid-3">
+                <div class="card hover-lift animate-fade-in">
+                    <div class="card-body">
+                        <div class="badge badge-accent mb-3">Upcoming</div>
+                        <h4>Kocheng Klinik</h4>
+                        <p>Interactive learning sessions where members can practice and improve their jazz skills in a supportive environment.</p>
+                        <a href="events/klinik.html" class="btn btn-outline mt-3">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="card hover-lift animate-fade-in">
+                    <div class="card-body">
+                        <div class="badge badge-pink mb-3">Upcoming</div>
+                        <h4>Mentoring Sessions</h4>
+                        <p>Personalized guidance from experienced musicians to help you develop your unique musical voice and technique.</p>
+                        <a href="events/mentoring.html" class="btn btn-outline mt-3">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="card hover-lift animate-fade-in">
+                    <div class="card-body">
+                        <div class="badge badge-purple mb-3">Upcoming</div>
+                        <h4>Jam & Jazz</h4>
+                        <p>Collaborative music-making sessions where creativity flows and community bonds are strengthened through shared musical experiences.</p>
+                        <a href="events/jam-and-jazz.html" class="btn btn-outline mt-3">Join Us</a>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Overview Cards Section -->
-        <section id="section-overview" class="bg-dark section-dark text-light">
-            <div class="container">
-                <div class="row g-4 justify-content-center">
-                    <div class="col-lg-8 text-center">
-                        <div class="subtitle wow fadeInUp" data-wow-delay=".0s">Our Objectives</div>
-                        <h2 class="wow fadeInUp" data-wow-delay=".2s">Building Musical Excellence</h2>
-                        <p class="lead wow fadeInUp" data-wow-delay=".4s">Structured learning through curriculum, events, and community engagement.</p>
-                    </div>
-                </div>
-
-                <div class="spacer-single"></div>
-
-                <div class="row g-4">
-                    <!-- Card A: Kurikulum -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="hover">
-                            <div class="bg-dark-2 relative rounded-1 overflow-hidden hover-bg-color hover-text-light wow scale-in-mask">
-                                <div class="abs p-40 bottom-0 z-2">
-                                    <div class="relative wow fadeInUp">
-                                        <span class="badge bg-main-600 mb-3">Kurikulum</span>
-                                        <h4>Structured Learning</h4>
-                                        <p class="mb-0">Improve members' musical skills via a structured curriculum and learning facilities.</p>
-                                        <div class="mt-3">
-                                            <small class="text-muted">KPI: 80% member satisfaction within one management year</small>
-                                        </div>
-                                        <div class="mt-2">
-                                            <strong>Initiative:</strong> The Catz' Module<br>
-                                            <strong>Target:</strong> At least 4 modules referencing The Real ITBJazz Book
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="gradient-edge-bottom h-100"></div>
-                                <img src="assets/images/misc/curriculum.webp" class="w-100 hover-scale-1-1" alt="Curriculum">
-                                <div class="abs w-100 h-100 start-0 top-0 hover-op-1 radial-gradient-color"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card C: Event (Klinik) -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="hover">
-                            <div class="bg-dark-2 relative rounded-1 overflow-hidden hover-bg-color hover-text-light wow scale-in-mask">
-                                <div class="abs p-40 bottom-0 z-2">
-                                    <div class="relative wow fadeInUp">
-                                        <span class="badge bg-main-600 mb-3">Event</span>
-                                        <h4>Kocheng Klinik</h4>
-                                        <p class="mb-0">Improve members' skills through event-based learning vehicles.</p>
-                                        <div class="mt-3">
-                                            <small class="text-muted">KPI: 80% member satisfaction within one management year</small>
-                                        </div>
-                                        <div class="mt-2">
-                                            <strong>Target:</strong> ≥4 internal + ≥1 external Kocheng Klinik sessions
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="gradient-edge-bottom h-100"></div>
-                                <img src="assets/images/misc/klinik.webp" class="w-100 hover-scale-1-1" alt="Kocheng Klinik">
-                                <div class="abs w-100 h-100 start-0 top-0 hover-op-1 radial-gradient-color"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card D: Mentoring -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="hover">
-                            <div class="bg-dark-2 relative rounded-1 overflow-hidden hover-bg-color hover-text-light wow scale-in-mask">
-                                <div class="abs p-40 bottom-0 z-2">
-                                    <div class="relative wow fadeInUp">
-                                        <span class="badge bg-main-600 mb-3">Mentoring</span>
-                                        <h4>Personal Guidance</h4>
-                                        <p class="mb-0">One-on-one and group mentoring sessions for skill development.</p>
-                                        <div class="mt-2">
-                                            <strong>Target:</strong> ≥4 Mentoring sessions aligned with curriculum
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="gradient-edge-bottom h-100"></div>
-                                <img src="assets/images/misc/mentoring.webp" class="w-100 hover-scale-1-1" alt="Mentoring">
-                                <div class="abs w-100 h-100 start-0 top-0 hover-op-1 radial-gradient-color"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card E: Jam and Jazz -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="hover">
-                            <div class="bg-dark-2 relative rounded-1 overflow-hidden hover-bg-color hover-text-light wow scale-in-mask">
-                                <div class="abs p-40 bottom-0 z-2">
-                                    <div class="relative wow fadeInUp">
-                                        <span class="badge bg-main-600 mb-3">Jam and Jazz</span>
-                                        <h4>Collaborative Expression</h4>
-                                        <p class="mb-0">Enhance music-making experience via active, appreciative, collaborative expression.</p>
-                                        <div class="mt-2">
-                                            <strong>Target:</strong> ≥1 Jam and Jazz event within one management year
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="gradient-edge-bottom h-100"></div>
-                                <img src="assets/images/misc/jam-jazz.webp" class="w-100 hover-scale-1-1" alt="Jam and Jazz">
-                                <div class="abs w-100 h-100 start-0 top-0 hover-op-1 radial-gradient-color"></div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- CTA Section -->
+    <section class="section section-gray">
+        <div class="container">
+            <div class="text-center">
+                <h2>Ready to Start Your Jazz Journey?</h2>
+                <p class="lead mb-4">Join our community and discover the world of jazz through structured learning and collaborative experiences.</p>
+                <div class="hero-actions">
+                    <a href="modules/index.html" class="btn btn-primary">Browse All Modules</a>
+                    <a href="about.html" class="btn btn-secondary">Get in Touch</a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Upcoming Events Strip -->
-        <section id="section-upcoming" class="bg-dark section-dark text-light">
-            <div class="container">
-                <div class="row g-4 justify-content-center">
-                    <div class="col-lg-8 text-center">
-                        <div class="subtitle wow fadeInUp" data-wow-delay=".0s">What's next for ITBJazz Academy?</div>
-                        <h2 class="wow fadeInUp" data-wow-delay=".2s">Upcoming</h2>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>academy.itbjazz</h3>
+                    <p>A living catalogue of programs, modules, and community projects designed to enhance your musical journey.</p>
+                    <div class="social-icons mt-3">
+                        <a href="#">📘</a>
+                        <a href="#">📷</a>
+                        <a href="#">🐦</a>
+                        <a href="#">📺</a>
                     </div>
                 </div>
-
-                <div class="spacer-single"></div>
-
-                <div class="row g-4">
-                    <!-- Klinik -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card bg-dark-2 border-0 hover">
-                            <div class="card-body p-4">
-                                <div class="d-flex align-items-center mb-3">
-                                    <span class="badge bg-warning-600 me-3">Upcoming</span>
-                                    <h5 class="mb-0">Kocheng Klinik</h5>
-                                </div>
-                                <p class="text-muted mb-3">Kocheng Klinik sessions are being prepared. Watch this space.</p>
-                                <a href="events/klinik.html" class="btn btn-outline-light btn-sm">View Page</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Mentoring -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card bg-dark-2 border-0 hover">
-                            <div class="card-body p-4">
-                                <div class="d-flex align-items-center mb-3">
-                                    <span class="badge bg-warning-600 me-3">Upcoming</span>
-                                    <h5 class="mb-0">Mentoring</h5>
-                                </div>
-                                <p class="text-muted mb-3">Mentoring sessions are in the works. Details soon.</p>
-                                <a href="events/mentoring.html" class="btn btn-outline-light btn-sm">View Page</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Jam and Jazz -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card bg-dark-2 border-0 hover">
-                            <div class="card-body p-4">
-                                <div class="d-flex align-items-center mb-3">
-                                    <span class="badge bg-warning-600 me-3">Upcoming</span>
-                                    <h5 class="mb-0">Jam and Jazz</h5>
-                                </div>
-                                <p class="text-muted mb-3">Our next Jam and Jazz is brewing. Stay tuned.</p>
-                                <a href="events/jam-and-jazz.html" class="btn btn-outline-light btn-sm">View Page</a>
-                            </div>
-                        </div>
-                    </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="modules/index.html">Modules</a></p>
+                    <p><a href="events/klinik.html">Klinik</a></p>
+                    <p><a href="events/mentoring.html">Mentoring</a></p>
+                    <p><a href="events/jam-and-jazz.html">Jam & Jazz</a></p>
+                    <p><a href="about.html">About</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <p><a href="#">Learning Materials</a></p>
+                    <p><a href="#">Community Guidelines</a></p>
+                    <p><a href="#">Support</a></p>
+                    <p><a href="#">Contact Us</a></p>
                 </div>
             </div>
-        </section>
-
-        <!-- The Catz' Module Highlight -->
-        <section id="section-catz" class="bg-dark section-dark text-light">
-            <div class="container">
-                <div class="row g-4 align-items-center">
-                    <div class="col-lg-6">
-                        <div class="me-lg-5 pe-lg-5 py-5 my-5">
-                            <div class="subtitle wow fadeInUp" data-wow-delay=".2s">Featured Module</div>
-                            <h2 class="wow fadeInUp" data-wow-delay=".4s">The Catz' Module</h2>
-                            <p class="wow fadeInUp" data-wow-delay=".6s">A growing PDF-based module series inspired by The Real ITBJazz Book. Tap to view.</p>
-                            <a href="modules/catz.html" class="btn-main fx-slide mt-4"><span>View Module</span></a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="wow scaleIn">
-                            <div class="poster-card relative rounded-1 overflow-hidden hover">
-                                <img id="catz-poster" src="assets/images/placeholder-poster.jpg" class="w-100 hover-scale-1-1" alt="Poster for The Catz' Module">
-                                <div class="abs w-100 h-100 start-0 top-0 bg-dark-50 d-flex align-items-center justify-content-center">
-                                    <div class="text-center">
-                                        <h4 class="text-white mb-3">The Catz' Module</h4>
-                                        <p class="text-white-50">Coming Soon</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 academy.itbjazz. All rights reserved.</p>
             </div>
-        </section>
+        </div>
+    </footer>
 
-        <!-- Footer -->
-        <footer class="text-light section-dark">
-            <div class="container">
-                <div class="row g-4 align-items-center">
-                    <div class="col-md-12">
-                        <div class="d-lg-flex align-items-center justify-content-between text-center">
-                            <div>
-                                <h3 class="fs-20">ITBJazz Academy</h3>
-                                A living catalogue of programs, modules, and community projects
-                            </div>
-                            <div>
-                                <img src="assets/images/logo.svg" class="w-150px" alt="academy.itbjazz">
-                                <div class="social-icons mb-sm-30 mt-4">
-                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="fs-20">Quick Links</h3>
-                                <div class="d-flex flex-column">
-                                    <a href="about.html" class="text-light mb-2">About</a>
-                                    <a href="modules/index.html" class="text-light mb-2">Modules</a>
-                                    <a href="events/klinik.html" class="text-light mb-2">Klinik</a>
-                                    <a href="events/mentoring.html" class="text-light mb-2">Mentoring</a>
-                                    <a href="events/jam-and-jazz.html" class="text-light mb-2">Jam & Jazz</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="subfooter">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            Copyright 2025 - academy.itbjazz
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-    <!-- Javascript Files -->
-    <script type="module" src="assets/js/vendors.js"></script>
-    <script type="module" src="assets/js/designesia.js"></script>
-    <script type="module" src="assets/js/supabase.js"></script>
-    <script type="module" src="assets/js/animations.js"></script>
-    <script type="module" src="assets/js/main.js"></script>
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 1px 2px 0 rgba(0, 0, 0, 0.05)';
+            }
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
