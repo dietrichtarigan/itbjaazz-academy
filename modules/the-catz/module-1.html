@@ -110,6 +110,9 @@
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
+            pointer-events: auto;
+            position: relative;
+            z-index: 10;
         }
 
         .play-button:hover {
@@ -269,6 +272,9 @@
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
+            pointer-events: auto;
+            position: relative;
+            z-index: 10;
         }
 
         .section-item:last-child {
@@ -742,85 +748,141 @@
 
         // Event listeners
         function setupEventListeners() {
-            // Section click handlers
-            document.getElementById('sectionList').addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent default behavior
-                e.stopPropagation(); // Stop event bubbling
+            // Remove any existing event listeners first
+            const sectionList = document.getElementById('sectionList');
+            if (sectionList) {
+                // Clone and replace to remove all event listeners
+                const newSectionList = sectionList.cloneNode(true);
+                sectionList.parentNode.replaceChild(newSectionList, sectionList);
                 
-                const sectionItem = e.target.closest('.section-item');
-                if (!sectionItem) return;
+                // Add new event listener
+                newSectionList.addEventListener('click', function(e) {
+                    console.log('Section list clicked:', e.target);
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    
+                    const sectionItem = e.target.closest('.section-item');
+                    if (!sectionItem) {
+                        console.log('No section item found');
+                        return;
+                    }
 
-                const sectionId = sectionItem.dataset.section;
-                const checkbox = sectionItem.querySelector('.section-checkbox');
-                
-                // Toggle checkbox
-                const progress = loadProgress();
-                progress[sectionId] = !progress[sectionId];
-                saveProgress(progress);
-                
-                checkbox.classList.toggle('checked', progress[sectionId]);
-                updateProgress();
+                    const sectionId = sectionItem.dataset.section;
+                    console.log('Section ID:', sectionId);
+                    
+                    const checkbox = sectionItem.querySelector('.section-checkbox');
+                    if (!checkbox) {
+                        console.log('No checkbox found');
+                        return;
+                    }
+                    
+                    // Toggle checkbox
+                    const progress = loadProgress();
+                    progress[sectionId] = !progress[sectionId];
+                    saveProgress(progress);
+                    
+                    checkbox.classList.toggle('checked', progress[sectionId]);
+                    updateProgress();
 
-                // Scroll to section
-                const targetElement = document.getElementById(sectionId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
+                    // Scroll to section
+                    const targetElement = document.getElementById(sectionId);
+                    if (targetElement) {
+                        console.log('Scrolling to:', sectionId);
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else {
+                        console.log('Target element not found:', sectionId);
+                    }
+                });
+            }
 
             // Media player handlers
             const playButton = document.getElementById('playButton');
-            const progressBar = document.getElementById('progressBar');
-            const progressFill = document.getElementById('progressFill');
-            const timeDisplay = document.getElementById('timeDisplay');
-
-            playButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
+            if (playButton) {
+                // Remove existing listeners
+                const newPlayButton = playButton.cloneNode(true);
+                playButton.parentNode.replaceChild(newPlayButton, playButton);
                 
-                // Toggle play/pause
-                const isPlaying = playButton.textContent === '⏸';
-                playButton.textContent = isPlaying ? '▶' : '⏸';
-                
-                if (!isPlaying) {
-                    // Load video if not loaded
-                    const mediaPlaceholder = document.getElementById('mediaPlaceholder');
-                    if (mediaPlaceholder.innerHTML.includes('Click to load media')) {
-                        mediaPlaceholder.innerHTML = `
-                            <iframe 
-                                src="${moduleData.heroVideo}" 
-                                title="Module intro" 
-                                loading="lazy" 
-                                frameborder="0" 
-                                allowfullscreen
-                                style="width: 100%; height: 100%; border-radius: 0.5rem;">
-                            </iframe>
-                        `;
+                newPlayButton.addEventListener('click', function(e) {
+                    console.log('Play button clicked');
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    
+                    // Toggle play/pause
+                    const isPlaying = newPlayButton.textContent === '⏸';
+                    newPlayButton.textContent = isPlaying ? '▶' : '⏸';
+                    
+                    if (!isPlaying) {
+                        // Load video if not loaded
+                        const mediaPlaceholder = document.getElementById('mediaPlaceholder');
+                        if (mediaPlaceholder && mediaPlaceholder.innerHTML.includes('Click to load media')) {
+                            mediaPlaceholder.innerHTML = `
+                                <iframe 
+                                    src="${moduleData.heroVideo}" 
+                                    title="Module intro" 
+                                    loading="lazy" 
+                                    frameborder="0" 
+                                    allowfullscreen
+                                    style="width: 100%; height: 100%; border-radius: 0.5rem;">
+                                </iframe>
+                            `;
+                        }
                     }
-                }
-            });
+                });
+            }
 
             // Mobile accordion
             const programTitle = document.getElementById('programTitle');
             const sectionList = document.getElementById('sectionList');
             
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 768 && programTitle) {
                 programTitle.style.cursor = 'pointer';
-                programTitle.addEventListener('click', (e) => {
+                
+                // Remove existing listeners
+                const newProgramTitle = programTitle.cloneNode(true);
+                programTitle.parentNode.replaceChild(newProgramTitle, programTitle);
+                
+                newProgramTitle.addEventListener('click', function(e) {
+                    console.log('Program title clicked');
                     e.preventDefault();
                     e.stopPropagation();
-                    programTitle.classList.toggle('expanded');
-                    sectionList.classList.toggle('expanded');
+                    e.stopImmediatePropagation();
+                    
+                    newProgramTitle.classList.toggle('expanded');
+                    if (sectionList) {
+                        sectionList.classList.toggle('expanded');
+                    }
                 });
             }
         }
 
+        // Prevent all default link behavior
+        function preventDefaultLinks() {
+            // Prevent all links from navigating
+            document.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A' && e.target.href) {
+                    // Only prevent if it's not our interactive elements
+                    if (!e.target.closest('.section-item') && 
+                        !e.target.closest('.play-button') && 
+                        !e.target.closest('.program-title')) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Prevented link navigation:', e.target.href);
+                    }
+                }
+            }, true);
+        }
+
         // Initialize
         function init() {
+            console.log('Initializing Catz Module...');
+            preventDefaultLinks();
             renderSections();
             renderContent();
             updateProgress();
             setupEventListeners();
+            console.log('Catz Module initialized successfully');
         }
 
         // Start when DOM is ready
