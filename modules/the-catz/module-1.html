@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Catz Module 1 | academy.itbjazz</title>
+    <meta name="description" content="The Catz Module 1 - Jazz Fundamentals. Learn piano basics, music theory, and jazz techniques from ITBJazz Faculty.">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Files -->
+    <link href="../../assets/css/main.css" rel="stylesheet" type="text/css">
+    
+    <style>
+        /* Module-specific styles */
+        .module-container {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .module-content {
+            min-width: 0; /* Prevent grid overflow */
+        }
+
+        .module-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .module-hero {
+            background: var(--white);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--gray-200);
+        }
+
+        .module-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .module-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+
+        .module-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            background: var(--gradient-primary);
+            color: var(--white);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .media-player {
+            background: var(--gray-100);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .media-placeholder {
+            width: 100%;
+            height: 250px;
+            background: var(--gray-200);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+
+        .media-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .play-button {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 4px;
+            background: var(--gray-300);
+            border-radius: 2px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+            width: 30%;
+            transition: width 0.3s ease;
+        }
+
+        .time-display {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            min-width: 60px;
+        }
+
+        .content-body {
+            background: var(--white);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--gray-200);
+        }
+
+        .content-body h2 {
+            color: var(--primary-color);
+            font-size: 1.75rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--gray-200);
+        }
+
+        .content-body h2:first-child {
+            margin-top: 0;
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .content-body h3 {
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .content-body p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .content-body ul, .content-body ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        .content-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .content-body blockquote {
+            background: var(--gray-50);
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+            font-style: italic;
+        }
+
+        .content-body code {
+            background: var(--gray-100);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+
+        .content-body a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .content-body a:hover {
+            text-decoration: underline;
+        }
+
+        /* Sidebar Styles */
+        .program-card {
+            background: var(--white);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--gray-200);
+            margin-bottom: 1rem;
+        }
+
+        .program-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .progress-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .progress-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .progress-ring {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary-color) 0deg, var(--gray-300) 0deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .section-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .section-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--gray-200);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .section-item:last-child {
+            border-bottom: none;
+        }
+
+        .section-item:hover {
+            background: var(--gray-50);
+            border-radius: 0.5rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+
+        .section-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gray-300);
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .section-checkbox.checked {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .section-checkbox.checked::after {
+            content: '✓';
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .section-text {
+            flex: 1;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .section-item:hover .section-text {
+            color: var(--text-primary);
+        }
+
+        /* Resources Section */
+        .resources-section {
+            background: var(--white);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--gray-200);
+        }
+
+        .resources-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .resource-item:hover {
+            color: var(--primary-color);
+        }
+
+        .resource-icon {
+            margin-right: 0.5rem;
+            font-size: 1rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .module-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .module-sidebar {
+                position: static;
+                order: 2;
+            }
+
+            .module-content {
+                order: 1;
+            }
+
+            .program-card {
+                margin-bottom: 1rem;
+            }
+
+            .section-list {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .section-list.expanded {
+                max-height: 500px;
+            }
+
+            .program-title {
+                cursor: pointer;
+                position: relative;
+            }
+
+            .program-title::after {
+                content: '▼';
+                position: absolute;
+                right: 0;
+                transition: transform 0.3s ease;
+            }
+
+            .program-title.expanded::after {
+                transform: rotate(180deg);
+            }
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: var(--gray-50);
+            padding: 1rem 0;
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb-content {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb-separator {
+            color: var(--gray-400);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="../../index.html" class="logo">
+                    <img src="../../assets/images/logo.svg" alt="academy.itbjazz">
+                    <span class="logo-text">academy.itbjazz</span>
+                </a>
+                
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../index.html" class="active">Modules</a></li>
+                        <li><a href="../../events/klinik.html">Klinik</a></li>
+                        <li><a href="../../events/mentoring.html">Mentoring</a></li>
+                        <li><a href="../../events/jam-and-jazz.html">Jam & Jazz</a></li>
+                        <li><a href="../../about.html">About</a></li>
+                    </ul>
+                </nav>
+                
+                <a href="../index.html" class="btn btn-primary">View Modules</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-content">
+                <a href="../../index.html">Home</a>
+                <span class="breadcrumb-separator">></span>
+                <a href="../index.html">Modules</a>
+                <span class="breadcrumb-separator">></span>
+                <span>The Catz Module 1</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="module-container">
+                <!-- Main Content (68%) -->
+                <div class="module-content">
+                    <!-- Module Hero -->
+                    <div class="module-hero">
+                        <h1 class="module-title">The Catz Module 1</h1>
+                        <p class="module-subtitle">By ITBJazz Faculty • Jazz Fundamentals</p>
+                        <div class="module-tag">The Catz' Module</div>
+                    </div>
+
+                    <!-- Media Player -->
+                    <div class="media-player">
+                        <div class="media-placeholder" id="mediaPlaceholder">
+                            <div>
+                                <div style="font-size: 3rem; margin-bottom: 1rem;">▶️</div>
+                                <div>732 × 422</div>
+                                <div style="font-size: 0.875rem; margin-top: 0.5rem;">Click to load media</div>
+                            </div>
+                        </div>
+                        <div class="media-controls">
+                            <button class="play-button" id="playButton">▶</button>
+                            <div class="progress-bar" id="progressBar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <div class="time-display" id="timeDisplay">0:00 / 0:00</div>
+                        </div>
+                    </div>
+
+                    <!-- Content Body -->
+                    <div class="content-body" id="contentBody">
+                        <!-- Content will be loaded dynamically from MDX -->
+                    </div>
+                </div>
+
+                <!-- Sidebar (32%) -->
+                <div class="module-sidebar">
+                    <!-- Program Card -->
+                    <div class="program-card">
+                        <h3 class="program-title" id="programTitle">Module 1 Program</h3>
+                        <div class="progress-info">
+                            <span class="progress-text" id="progressText">0/5</span>
+                            <div class="progress-ring" id="progressRing">0%</div>
+                        </div>
+                        <ul class="section-list" id="sectionList">
+                            <!-- Sections will be loaded dynamically -->
+                        </ul>
+                    </div>
+
+                    <!-- Resources Card -->
+                    <div class="resources-section">
+                        <h3 class="resources-title">Resources</h3>
+                        <a href="/files/catz-module1-handout.pdf" class="resource-item">
+                            <span class="resource-icon">📄</span>
+                            <span>PDF Handout</span>
+                        </a>
+                        <a href="https://open.spotify.com/playlist/37i9dQZF1DX0SM0LYsmbMT" class="resource-item" target="_blank">
+                            <span class="resource-icon">🎵</span>
+                            <span>Reference Playlist</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>academy.itbjazz</h3>
+                    <p>A living catalogue of programs, modules, and community projects designed to enhance your musical journey.</p>
+                    <div class="social-icons mt-3">
+                        <a href="#">📘</a>
+                        <a href="#">📷</a>
+                        <a href="#">🐦</a>
+                        <a href="#">📺</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="../index.html">Modules</a></p>
+                    <p><a href="../../events/klinik.html">Klinik</a></p>
+                    <p><a href="../../events/mentoring.html">Mentoring</a></p>
+                    <p><a href="../../events/jam-and-jazz.html">Jam & Jazz</a></p>
+                    <p><a href="../../about.html">About</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <p><a href="#">Learning Materials</a></p>
+                    <p><a href="#">Community Guidelines</a></p>
+                    <p><a href="#">Support</a></p>
+                    <p><a href="#">Contact Us</a></p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 academy.itbjazz. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        // Module data from MDX frontmatter
+        const moduleData = {
+            title: "The Catz Module 1",
+            author: "ITBJazz Faculty",
+            tags: ["The Catz' Module", "Jazz Fundamentals"],
+            heroVideo: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            heroAudio: "/media/catz-intro.mp3",
+            resources: [
+                { label: "PDF Handout", url: "/files/catz-module1-handout.pdf" },
+                { label: "Reference Playlist", url: "https://open.spotify.com/playlist/37i9dQZF1DX0SM0LYsmbMT" }
+            ],
+            sections: [
+                { id: "intro-to-piano", title: "Introduction to Piano" },
+                { id: "music-theories", title: "Music Theories You Have to Master" },
+                { id: "band-with-piano", title: "How to Play in a Band with Piano" },
+                { id: "look-up-to", title: "Jazz Pianists You Can Look Up To" },
+                { id: "listen-and-practice", title: "Jazz Pieces You Can Listen and Practice To" }
+            ]
+        };
+
+        // Progress tracking
+        const PROGRESS_KEY = 'catz-m1-progress';
+        
+        function loadProgress() {
+            const saved = localStorage.getItem(PROGRESS_KEY);
+            if (saved) {
+                return JSON.parse(saved);
+            }
+            return {
+                'intro-to-piano': false,
+                'music-theories': false,
+                'band-with-piano': false,
+                'look-up-to': false,
+                'listen-and-practice': false
+            };
+        }
+
+        function saveProgress(progress) {
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        }
+
+        function updateProgress() {
+            const progress = loadProgress();
+            const completed = Object.values(progress).filter(Boolean).length;
+            const total = moduleData.sections.length;
+            
+            document.getElementById('progressText').textContent = `${completed}/${total}`;
+            document.getElementById('progressRing').textContent = `${Math.round((completed/total) * 100)}%`;
+            
+            // Update progress ring visual
+            const ring = document.getElementById('progressRing');
+            const percentage = (completed/total) * 360;
+            ring.style.background = `conic-gradient(var(--primary-color) ${percentage}deg, var(--gray-300) ${percentage}deg)`;
+        }
+
+        function renderSections() {
+            const sectionList = document.getElementById('sectionList');
+            const progress = loadProgress();
+            
+            sectionList.innerHTML = moduleData.sections.map(section => `
+                <li class="section-item" data-section="${section.id}">
+                    <div class="section-checkbox ${progress[section.id] ? 'checked' : ''}"></div>
+                    <div class="section-text">${section.title}</div>
+                </li>
+            `).join('');
+        }
+
+        function renderContent() {
+            const contentBody = document.getElementById('contentBody');
+            
+            // This would normally load from MDX file, but for now we'll use static content
+            contentBody.innerHTML = `
+                <h2 id="intro-to-piano">Introduction to Piano</h2>
+                <p>Piano adalah fondasi yang kuat untuk memahami jazz. Dalam bagian ini, kita akan mempelajari dasar-dasar teknik piano yang esensial untuk bermain jazz.</p>
+                
+                <h3>Posisi dan Postur</h3>
+                <ul>
+                    <li><strong>Posisi duduk</strong>: Duduk tegak dengan punggung lurus, kaki rata di lantai</li>
+                    <li><strong>Tinggi kursi</strong>: Siku harus sejajar dengan tuts piano</li>
+                    <li><strong>Jarak dari piano</strong>: Lengan harus membentuk sudut 90 derajat</li>
+                </ul>
+
+                <h3>Teknik Dasar</h3>
+                <ul>
+                    <li><strong>Finger positioning</strong>: Gunakan ujung jari, bukan bantalan jari</li>
+                    <li><strong>Wrist movement</strong>: Gerakan pergelangan tangan yang halus dan rileks</li>
+                    <li><strong>Arm weight</strong>: Gunakan berat lengan untuk menghasilkan suara yang konsisten</li>
+                </ul>
+
+                <h2 id="music-theories">Music Theories You Have to Master</h2>
+                <p>Teori musik adalah bahasa jazz. Tanpa pemahaman teori yang solid, sulit untuk berimprovisasi dan berkomunikasi dengan musisi lain.</p>
+
+                <h3>1. Scales</h3>
+                <p>Scales adalah fondasi dari semua improvisasi jazz. Beberapa scale penting yang harus dikuasai:</p>
+                <ul>
+                    <li><strong>Major Scale</strong>: Dasar dari semua scale lainnya</li>
+                    <li><strong>Minor Scale</strong>: Natural, harmonic, dan melodic minor</li>
+                    <li><strong>Pentatonic Scale</strong>: Scale 5 nada yang sangat berguna untuk improvisasi</li>
+                    <li><strong>Blues Scale</strong>: Scale dengan "blue notes" yang khas jazz</li>
+                </ul>
+
+                <h3>2. Chords</h3>
+                <p>Pemahaman chord adalah kunci untuk bermain jazz:</p>
+                <ul>
+                    <li><strong>Triads</strong>: Major, minor, diminished, augmented</li>
+                    <li><strong>Seventh Chords</strong>: Maj7, min7, dom7, min7b5, dim7</li>
+                    <li><strong>Extended Chords</strong>: 9th, 11th, 13th chords</li>
+                    <li><strong>Altered Chords</strong>: b9, #9, #11, b13</li>
+                </ul>
+
+                <h2 id="band-with-piano">How to Play in a Band with Piano</h2>
+                <p>Bermain piano dalam band jazz membutuhkan pendekatan yang berbeda dari bermain solo. Di sini kita akan mempelajari peran dan teknik yang tepat.</p>
+
+                <h3>1. Which Role to Fill</h3>
+                <p>Piano dalam jazz band bisa mengambil berbagai peran:</p>
+                <ul>
+                    <li><strong>Comping</strong>: Mengiringi soloist dengan chord progressions</li>
+                    <li><strong>Soloing</strong>: Berimprovisasi sebagai lead instrument</li>
+                    <li><strong>Bass Line</strong>: Memainkan walking bass line (dalam trio tanpa bass)</li>
+                    <li><strong>Harmony</strong>: Menyediakan harmoni dan warna chord</li>
+                </ul>
+
+                <h2 id="look-up-to">Jazz Pianists You Can Look Up To</h2>
+                <p>Mempelajari dari master adalah cara terbaik untuk mengembangkan style dan teknik. Berikut adalah beberapa pianis jazz legendaris yang wajib dipelajari:</p>
+
+                <h3>1. Thelonious Monk</h3>
+                <ul>
+                    <li><strong>Style</strong>: Unik, angular, dan rhythmically complex</li>
+                    <li><strong>What to learn</strong>: Rhythm, space, dan penggunaan silence</li>
+                    <li><strong>Key recordings</strong>: "Round Midnight", "Blue Monk"</li>
+                </ul>
+
+                <h3>2. Oscar Peterson</h3>
+                <ul>
+                    <li><strong>Style</strong>: Virtuosic, technical brilliance</li>
+                    <li><strong>What to learn</strong>: Technique, speed, dan precision</li>
+                    <li><strong>Key recordings</strong>: "Night Train", "C Jam Blues"</li>
+                </ul>
+
+                <h2 id="listen-and-practice">Jazz Pieces You Can Listen and Practice To</h2>
+                <p>Berikut adalah beberapa lagu jazz yang wajib didengarkan dan dipelajari:</p>
+
+                <h3>Notable Pieces</h3>
+                <ol>
+                    <li><strong>"Autumn Leaves"</strong> - Joseph Kosma</li>
+                    <li><strong>"Blue Moon"</strong> - Richard Rodgers</li>
+                    <li><strong>"All the Things You Are"</strong> - Jerome Kern</li>
+                    <li><strong>"Summertime"</strong> - George Gershwin</li>
+                    <li><strong>"Take Five"</strong> - Paul Desmond</li>
+                </ol>
+
+                <h3>How to Approach Learning a Piece</h3>
+                <p>Langkah-langkah sistematis untuk mempelajari lagu jazz:</p>
+                <ol>
+                    <li><strong>Listen First</strong>: Dengarkan berbagai versi dari lagu tersebut</li>
+                    <li><strong>Analyze the Form</strong>: Identifikasi struktur AABA, ABAC, dll.</li>
+                    <li><strong>Learn the Melody</strong>: Hafalkan melodi utama</li>
+                    <li><strong>Study the Harmony</strong>: Analisis chord progression</li>
+                    <li><strong>Practice Slowly</strong>: Mulai dengan tempo lambat</li>
+                    <li><strong>Add Your Style</strong>: Eksperimen dengan improvisasi</li>
+                </ol>
+            `;
+        }
+
+        // Event listeners
+        function setupEventListeners() {
+            // Section click handlers
+            document.getElementById('sectionList').addEventListener('click', (e) => {
+                const sectionItem = e.target.closest('.section-item');
+                if (!sectionItem) return;
+
+                const sectionId = sectionItem.dataset.section;
+                const checkbox = sectionItem.querySelector('.section-checkbox');
+                
+                // Toggle checkbox
+                const progress = loadProgress();
+                progress[sectionId] = !progress[sectionId];
+                saveProgress(progress);
+                
+                checkbox.classList.toggle('checked', progress[sectionId]);
+                updateProgress();
+
+                // Scroll to section
+                const targetElement = document.getElementById(sectionId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+
+            // Media player handlers
+            const playButton = document.getElementById('playButton');
+            const progressBar = document.getElementById('progressBar');
+            const progressFill = document.getElementById('progressFill');
+            const timeDisplay = document.getElementById('timeDisplay');
+
+            playButton.addEventListener('click', () => {
+                // Toggle play/pause
+                const isPlaying = playButton.textContent === '⏸';
+                playButton.textContent = isPlaying ? '▶' : '⏸';
+                
+                if (!isPlaying) {
+                    // Load video if not loaded
+                    const mediaPlaceholder = document.getElementById('mediaPlaceholder');
+                    if (mediaPlaceholder.innerHTML.includes('Click to load media')) {
+                        mediaPlaceholder.innerHTML = `
+                            <iframe 
+                                src="${moduleData.heroVideo}" 
+                                title="Module intro" 
+                                loading="lazy" 
+                                frameborder="0" 
+                                allowfullscreen
+                                style="width: 100%; height: 100%; border-radius: 0.5rem;">
+                            </iframe>
+                        `;
+                    }
+                }
+            });
+
+            // Mobile accordion
+            const programTitle = document.getElementById('programTitle');
+            const sectionList = document.getElementById('sectionList');
+            
+            if (window.innerWidth <= 768) {
+                programTitle.style.cursor = 'pointer';
+                programTitle.addEventListener('click', () => {
+                    programTitle.classList.toggle('expanded');
+                    sectionList.classList.toggle('expanded');
+                });
+            }
+        }
+
+        // Initialize
+        function init() {
+            renderSections();
+            renderContent();
+            updateProgress();
+            setupEventListeners();
+        }
+
+        // Start when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>

@@ -10,7 +10,12 @@ This is a lightweight public website showcasing ITBJazz Academy's organizational
 
 - **Homepage** with overview cards, upcoming events, and featured module
 - **Modules Library** with grid gallery view
-- **Module Detail Pages** (starting with The Catz' Module)
+- **The Catz Module 1** - Interactive jazz piano learning page with:
+  - Course detail layout (68% + 32%)
+  - Progress tracking with localStorage
+  - Media player for video/audio content
+  - Sidebar checklist with 5 sections
+  - Mobile responsive with accordion
 - **Event Pages** for Klinik, Mentoring, and Jam & Jazz
 - **Responsive Design** optimized for mobile and desktop
 - **Supabase Integration** for dynamic content loading
