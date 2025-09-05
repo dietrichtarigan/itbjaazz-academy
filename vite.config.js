@@ -7,8 +7,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
-        modules: 'modules/index.html',
-        catz: 'modules/catz.html'
+        modules: 'modules/index.html'
       }
     }
   },

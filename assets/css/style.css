@@ -2,7 +2,8 @@
 
 
 /* AIvent
-/* created by designesia
+ * created by designesia
+ */
 
 @charset "utf-8";
 
@@ -329,7 +330,7 @@ header.smaller {
   -o-backdrop-filter: blur(10px);
   -moz-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border: none;*/
+  border: none;
 }
 
 header.header-mobile.header-float .header-inner,
@@ -4695,7 +4696,7 @@ ol.ol-style-1.c2 li::before{
 
 /* ================================================== */
 
-/* accordion
+/* accordion */
 
 /* ================================================== */
 
@@ -5458,7 +5459,7 @@ a.btn-right {
   text-decoration: none;
 }
 
-/* testimonial
+/* testimonial */
     /* ================================================== */
 
 .de_testi {
