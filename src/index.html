@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academy ITBJazz - A Living Catalogue</title>
+    <meta name="description" content="A living catalogue of Academy ITBJazz programs, modules, and community projects">
+    <meta name="keywords" content="ITBJazz, Academy, Modules, Jazz Education, Kocheng Klinik, Mentoring, Jam and Jazz">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://academy.itbjazz.netlify.app/">
+    <meta property="og:title" content="Academy ITBJazz - A Living Catalogue">
+    <meta property="og:description" content="A living catalogue of Academy ITBJazz programs, modules, and community projects">
+    <meta property="og:image" content="/images/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://academy.itbjazz.netlify.app/">
+    <meta property="twitter:title" content="Academy ITBJazz - A Living Catalogue">
+    <meta property="twitter:description" content="A living catalogue of Academy ITBJazz programs, modules, and community projects">
+    <meta property="twitter:image" content="/images/og-image.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <!-- Styles -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-content">
+            <a href="/" class="navbar-brand">academy.itbjazz</a>
+            
+            <!-- Navigation Menu -->
+            <ul class="navbar-nav" id="navbar-nav">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/modules/">Modules</a></li>
+                <li><a href="#upcoming">Events</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+            
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">academy.itbjazz</h1>
+            <p class="hero-subtitle">A living catalogue of our programs, modules, and community projects.</p>
+            <div class="hero-buttons">
+                <a href="/modules/" class="btn btn-primary btn-lg">View Modules</a>
+                <a href="#about" class="btn btn-secondary btn-lg">About</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview" class="section">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2>Our Pillars</h2>
+                <p class="text-xl text-gray-600">Core objectives driving Academy ITBJazz forward</p>
+            </div>
+            <div id="overview-grid" class="grid grid-cols-4 gap-6">
+                <!-- Overview cards will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- The Catz' Module Highlight -->
+    <section id="catz-highlight" class="section">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2>Featured Module</h2>
+                <p class="text-xl text-gray-600">Tap to explore our flagship learning material</p>
+            </div>
+            <div class="flex justify-center">
+                <div class="max-w-md">
+                    <div id="catz-module">
+                        <!-- Catz module poster will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Events Section -->
+    <section id="upcoming" class="section" style="background: var(--gray-50)">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2>What's Next for ITBJazz Academy?</h2>
+                <p class="text-xl text-gray-600">Upcoming programs and events</p>
+            </div>
+            <div id="upcoming-grid" class="grid grid-cols-3 gap-6">
+                <!-- Upcoming events will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="text-center mb-12">
+                <h2>About Academy ITBJazz</h2>
+                <div class="max-w-3xl mx-auto">
+                    <p class="text-lg text-gray-600 mb-6">
+                        Academy ITBJazz is an initiative to systematically document and share our educational programs, 
+                        learning modules, and community activities. We believe in structured learning, collaborative 
+                        expression, and continuous improvement of our members' musical skills.
+                    </p>
+                    <p class="text-lg text-gray-600">
+                        Through our curriculum-based approach, event-driven learning, and mentorship programs, 
+                        we aim to create a sustainable and effective learning environment for jazz enthusiasts.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Academy ITBJazz</h4>
+                    <p class="text-gray-400">A living catalogue of programs, modules, and community projects.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Modules</h4>
+                    <ul class="footer-links">
+                        <li><a href="/modules/">All Modules</a></li>
+                        <li><a href="/modules/catz">The Catz' Module</a></li>
+                        <li><a href="/curriculum/">Curriculum</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Events</h4>
+                    <ul class="footer-links">
+                        <li><a href="/events/klinik">Kocheng Klinik</a></li>
+                        <li><a href="/events/mentoring">Mentoring</a></li>
+                        <li><a href="/events/jam-and-jazz">Jam and Jazz</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Community</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="https://github.com/itbjazz" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                        <li><a href="mailto:contact@itbjazz.org">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Academy ITBJazz. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

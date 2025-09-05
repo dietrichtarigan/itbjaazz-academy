@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Catz' Module - Academy ITBJazz</title>
+    <meta name="description" content="The Catz' Module - A growing PDF-based module series inspired by The Real ITBJazz Book">
+    <meta name="keywords" content="ITBJazz, Catz Module, Jazz Education, Real ITBJazz Book">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://academy.itbjazz.netlify.app/modules/catz">
+    <meta property="og:title" content="The Catz' Module - Academy ITBJazz">
+    <meta property="og:description" content="A growing PDF-based module series inspired by The Real ITBJazz Book">
+    <meta property="og:image" content="/images/catz-module-poster.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <!-- Styles -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/main.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <a href="/" class="navbar-brand">academy.itbjazz</a>
+                <ul class="navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/modules/">Modules</a></li>
+                    <li><a href="/#upcoming">Events</a></li>
+                    <li><a href="/#about">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <section class="section-sm" style="background: var(--gray-50)">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="flex gap-2 text-sm text-gray-600">
+                    <li><a href="/" class="text-primary">Home</a></li>
+                    <li>/</li>
+                    <li><a href="/modules/" class="text-primary">Modules</a></li>
+                    <li>/</li>
+                    <li class="text-gray-500">The Catz' Module</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Module Header -->
+    <section class="section">
+        <div class="container">
+            <div class="grid grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1>The Catz' Module</h1>
+                    <p class="text-xl text-gray-600 mb-6">
+                        A growing PDF-based module series inspired by The Real ITBJazz Book. 
+                        This comprehensive learning material provides structured educational content 
+                        for jazz musicians at various skill levels.
+                    </p>
+                    
+                    <div class="mb-8">
+                        <div class="badge badge-primary mb-4">Kurikulum Initiative</div>
+                        <h3>About This Module</h3>
+                        <p class="text-gray-600 mb-4">
+                            The Catz' Module represents our commitment to providing structured, 
+                            sustainable, and effective learning materials. Each module is carefully 
+                            crafted to align with our curriculum goals and support both individual 
+                            study and group learning sessions.
+                        </p>
+                        <p class="text-gray-600">
+                            This series is part of our larger initiative to achieve 80% member 
+                            satisfaction within one management year through comprehensive educational 
+                            resources.
+                        </p>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button class="btn btn-primary" onclick="showComingSoon()">
+                            View PDF
+                        </button>
+                        <a href="/modules/" class="btn btn-secondary">
+                            Back to Modules
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="poster-card">
+                        <img src="/images/catz-module-poster.jpg" 
+                             alt="The Catz' Module poster" 
+                             onerror="this.src='/images/placeholder-poster.jpg'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section class="section" style="background: var(--gray-50)">
+        <div class="container">
+            <div class="text-center">
+                <h2>Module Content</h2>
+                <div class="max-w-2xl mx-auto">
+                    <div class="card">
+                        <div class="text-center p-8">
+                            <h3 class="text-2xl mb-4">Coming Soon</h3>
+                            <p class="text-gray-600 mb-6">
+                                The full PDF viewer and module content will be available soon. 
+                                We're currently preparing the interactive document experience 
+                                that will allow you to navigate through chapters and download 
+                                materials seamlessly.
+                            </p>
+                            <div class="badge badge-warning">In Development</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Module Details -->
+    <section class="section">
+        <div class="container">
+            <div class="grid grid-cols-3 gap-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Target Output</h4>
+                    </div>
+                    <div class="card-content">
+                        <p>At least 4 modules referencing The Real ITBJazz Book</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Format</h4>
+                    </div>
+                    <div class="card-content">
+                        <p>PDF-based learning materials with interactive elements</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Status</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="badge badge-warning">In Progress</div>
+                        <p class="mt-2">Module content is being developed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Links -->
+    <section class="section" style="background: var(--gray-50)">
+        <div class="container">
+            <div class="text-center mb-8">
+                <h2>Related Programs</h2>
+                <p class="text-gray-600">Explore other initiatives supporting this module</p>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Kocheng Klinik</h4>
+                        <div class="badge badge-secondary">Event</div>
+                    </div>
+                    <div class="card-content">
+                        <p>Internal and external sessions aligned with The Catz' Module curriculum</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/events/klinik" class="btn btn-secondary btn-sm">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Mentoring Program</h4>
+                        <div class="badge badge-secondary">Mentoring</div>
+                    </div>
+                    <div class="card-content">
+                        <p>Guided learning sessions that utilize The Catz' Module materials</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/events/mentoring" class="btn btn-secondary btn-sm">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Academy ITBJazz</h4>
+                    <p class="text-gray-400">A living catalogue of programs, modules, and community projects.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Modules</h4>
+                    <ul class="footer-links">
+                        <li><a href="/modules/">All Modules</a></li>
+                        <li><a href="/modules/catz">The Catz' Module</a></li>
+                        <li><a href="/curriculum/">Curriculum</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Events</h4>
+                    <ul class="footer-links">
+                        <li><a href="/events/klinik">Kocheng Klinik</a></li>
+                        <li><a href="/events/mentoring">Mentoring</a></li>
+                        <li><a href="/events/jam-and-jazz">Jam and Jazz</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Community</h4>
+                    <ul class="footer-links">
+                        <li><a href="/#about">About</a></li>
+                        <li><a href="https://github.com/itbjazz" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                        <li><a href="mailto:contact@itbjazz.org">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Academy ITBJazz. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        function showComingSoon() {
+            alert('PDF viewer coming soon! We\'re working on integrating an interactive document experience.');
+        }
+    </script>
+</body>
+</html>
