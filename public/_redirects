@@ -1,2 +1,11 @@
-# Netlify redirects for SPA routing
+# Netlify redirects for static site routing
+# Specific routes first
+/modules/the-catz/module-1 /modules/the-catz/module-1.html 200
+/modules /modules/index.html 200
+/about /about.html 200
+/events/klinik /events/klinik.html 200
+/events/mentoring /events/mentoring.html 200
+/events/jam-and-jazz /events/jam-and-jazz.html 200
+
+# Fallback to index for SPA behavior
 /* /index.html 200
