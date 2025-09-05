@@ -223,11 +223,38 @@
             margin-bottom: 1rem;
         }
 
-        .program-title {
+        .accordion-toggle {
             font-size: 1.25rem;
             font-weight: 600;
             color: var(--text-primary);
             margin-bottom: 1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            padding: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .accordion-toggle::after {
+            content: '▼';
+            position: absolute;
+            right: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-toggle[aria-expanded="true"]::after {
+            transform: rotate(180deg);
+        }
+
+        .program-panel {
+            transition: all 0.3s ease;
+        }
+
+        .program-panel[hidden] {
+            display: none;
         }
 
         .progress-info {
@@ -275,6 +302,21 @@
             pointer-events: auto;
             position: relative;
             z-index: 10;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .section-item:hover {
+            background: var(--gray-50);
+            border-radius: 0.5rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+
+        .section-item.is-checked {
+            background: var(--gray-100);
         }
 
         .section-item:last-child {
@@ -299,15 +341,16 @@
             justify-content: center;
             transition: all 0.3s ease;
             flex-shrink: 0;
+            pointer-events: none;
         }
 
-        .section-checkbox.checked {
+        .section-item.is-checked .section-checkbox {
             background: var(--primary-color);
             border-color: var(--primary-color);
             color: var(--white);
         }
 
-        .section-checkbox.checked::after {
+        .section-item.is-checked .section-checkbox::after {
             content: '✓';
             font-size: 0.75rem;
             font-weight: 600;
@@ -378,13 +421,13 @@
                 margin-bottom: 1rem;
             }
 
-            .section-list {
+            .program-panel {
                 max-height: 0;
                 overflow: hidden;
                 transition: max-height 0.3s ease;
             }
 
-            .section-list.expanded {
+            .program-panel:not([hidden]) {
                 max-height: 500px;
             }
 
@@ -497,7 +540,7 @@
                             </div>
                         </div>
                         <div class="media-controls">
-                            <button class="play-button" id="playButton">▶</button>
+                            <button class="play-button media-control" id="playButton" data-no-router="true">▶</button>
                             <div class="progress-bar" id="progressBar">
                                 <div class="progress-fill" id="progressFill"></div>
                             </div>
@@ -515,14 +558,18 @@
                 <div class="module-sidebar">
                     <!-- Program Card -->
                     <div class="program-card">
-                        <h3 class="program-title" id="programTitle">Module 1 Program</h3>
+                        <button type="button" class="accordion-toggle" id="programToggle" aria-expanded="false" data-no-router="true">
+                            Module 1 Program
+                        </button>
                         <div class="progress-info">
                             <span class="progress-text" id="progressText">0/5</span>
                             <div class="progress-ring" id="progressRing">0%</div>
                         </div>
-                        <ul class="section-list" id="sectionList">
-                            <!-- Sections will be loaded dynamically -->
-                        </ul>
+                        <div id="programPanel" class="program-panel">
+                            <ul class="section-list" id="sectionList">
+                                <!-- Sections will be loaded dynamically -->
+                            </ul>
+                        </div>
                     </div>
 
                     <!-- Resources Card -->
@@ -603,48 +650,54 @@
         };
 
         // Progress tracking
-        const PROGRESS_KEY = 'catz-m1-progress';
+        const STORAGE_KEY = 'catz-m1-progress';
         
-        function loadProgress() {
-            const saved = localStorage.getItem(PROGRESS_KEY);
-            if (saved) {
-                return JSON.parse(saved);
+        function getProgress() {
+            try { 
+                return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; 
+            } catch { 
+                return {}; 
             }
-            return {
-                'intro-to-piano': false,
-                'music-theories': false,
-                'band-with-piano': false,
-                'look-up-to': false,
-                'listen-and-practice': false
-            };
+        }
+        
+        function setProgress(p) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+            renderProgressCount();
         }
 
-        function saveProgress(progress) {
-            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
-        }
-
-        function updateProgress() {
-            const progress = loadProgress();
-            const completed = Object.values(progress).filter(Boolean).length;
-            const total = moduleData.sections.length;
-            
-            document.getElementById('progressText').textContent = `${completed}/${total}`;
-            document.getElementById('progressRing').textContent = `${Math.round((completed/total) * 100)}%`;
+        function renderProgressCount() {
+            const p = getProgress();
+            const done = ['intro-to-piano','music-theories','band-with-piano','look-up-to','listen-and-practice']
+                .filter(id => !!p[id]).length;
+            const el = document.querySelector('#progressText');
+            if (el) el.textContent = `${done}/5`;
             
             // Update progress ring visual
             const ring = document.getElementById('progressRing');
-            const percentage = (completed/total) * 360;
-            ring.style.background = `conic-gradient(var(--primary-color) ${percentage}deg, var(--gray-300) ${percentage}deg)`;
+            if (ring) {
+                const percentage = (done/5) * 360;
+                ring.style.background = `conic-gradient(var(--primary-color) ${percentage}deg, var(--gray-300) ${percentage}deg)`;
+                ring.textContent = `${Math.round((done/5) * 100)}%`;
+            }
+        }
+
+        function safeScrollTo(id) {
+            const t = document.getElementById(id);
+            if (!t) return;
+            t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.replaceState(null, '', `#${id}`); // update hash tanpa reload
         }
 
         function renderSections() {
             const sectionList = document.getElementById('sectionList');
-            const progress = loadProgress();
+            if (!sectionList) return;
             
             sectionList.innerHTML = moduleData.sections.map(section => `
-                <li class="section-item" data-section="${section.id}">
-                    <div class="section-checkbox ${progress[section.id] ? 'checked' : ''}"></div>
-                    <div class="section-text">${section.title}</div>
+                <li>
+                    <button type="button" class="section-item tracker-item" role="checkbox" aria-checked="false" data-section="${section.id}" data-no-router="true">
+                        <span class="section-checkbox" aria-hidden="true"></span>
+                        <span class="section-text">${section.title}</span>
+                    </button>
                 </li>
             `).join('');
         }
@@ -746,142 +799,94 @@
             `;
         }
 
-        // Event listeners
-        function setupEventListeners() {
-            // Remove any existing event listeners first
-            const sectionList = document.getElementById('sectionList');
-            if (sectionList) {
-                // Clone and replace to remove all event listeners
-                const newSectionList = sectionList.cloneNode(true);
-                sectionList.parentNode.replaceChild(newSectionList, sectionList);
-                
-                // Add new event listener
-                newSectionList.addEventListener('click', function(e) {
-                    console.log('Section list clicked:', e.target);
-                    e.preventDefault();
-                    e.stopPropagation();
-                    e.stopImmediatePropagation();
-                    
-                    const sectionItem = e.target.closest('.section-item');
-                    if (!sectionItem) {
-                        console.log('No section item found');
-                        return;
-                    }
-
-                    const sectionId = sectionItem.dataset.section;
-                    console.log('Section ID:', sectionId);
-                    
-                    const checkbox = sectionItem.querySelector('.section-checkbox');
-                    if (!checkbox) {
-                        console.log('No checkbox found');
-                        return;
-                    }
-                    
-                    // Toggle checkbox
-                    const progress = loadProgress();
-                    progress[sectionId] = !progress[sectionId];
-                    saveProgress(progress);
-                    
-                    checkbox.classList.toggle('checked', progress[sectionId]);
-                    updateProgress();
-
-                    // Scroll to section
-                    const targetElement = document.getElementById(sectionId);
-                    if (targetElement) {
-                        console.log('Scrolling to:', sectionId);
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    } else {
-                        console.log('Target element not found:', sectionId);
-                    }
-                });
+        // Safe event handling - prevent all navigation for interactive elements
+        document.addEventListener('click', function(e) {
+            const interactive = e.target.closest('.tracker-item, .accordion-toggle, .media-control, [data-no-router="true"]');
+            if (interactive) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation?.();
             }
+        }, true); // capture=true agar menang sebelum router
 
-            // Media player handlers
-            const playButton = document.getElementById('playButton');
-            if (playButton) {
-                // Remove existing listeners
-                const newPlayButton = playButton.cloneNode(true);
-                playButton.parentNode.replaceChild(newPlayButton, playButton);
-                
-                newPlayButton.addEventListener('click', function(e) {
-                    console.log('Play button clicked');
-                    e.preventDefault();
-                    e.stopPropagation();
-                    e.stopImmediatePropagation();
-                    
-                    // Toggle play/pause
-                    const isPlaying = newPlayButton.textContent === '⏸';
-                    newPlayButton.textContent = isPlaying ? '▶' : '⏸';
-                    
-                    if (!isPlaying) {
-                        // Load video if not loaded
-                        const mediaPlaceholder = document.getElementById('mediaPlaceholder');
-                        if (mediaPlaceholder && mediaPlaceholder.innerHTML.includes('Click to load media')) {
-                            mediaPlaceholder.innerHTML = `
-                                <iframe 
-                                    src="${moduleData.heroVideo}" 
-                                    title="Module intro" 
-                                    loading="lazy" 
-                                    frameborder="0" 
-                                    allowfullscreen
-                                    style="width: 100%; height: 100%; border-radius: 0.5rem;">
-                                </iframe>
-                            `;
-                        }
-                    }
-                });
+        // Tracker item handling
+        document.addEventListener('click', function(e) {
+            const item = e.target.closest('.tracker-item');
+            if (!item) return;
+            e.preventDefault();
+            e.stopPropagation();
+
+            const id = item.dataset.section;
+            const p = getProgress();
+            p[id] = !p[id];
+            setProgress(p);
+
+            item.setAttribute('aria-checked', String(p[id]));
+            item.classList.toggle('is-checked', p[id]);
+
+            safeScrollTo(id);
+        }, true); // capture agar mendahului router manapun
+
+        // Accordion handling
+        document.addEventListener('click', function(e) {
+            const btn = e.target.closest('.accordion-toggle');
+            if (!btn) return;
+            e.preventDefault();
+            e.stopPropagation();
+
+            const panel = document.getElementById('programPanel');
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', String(!expanded));
+            if (panel) {
+                panel.hidden = expanded;
             }
+        }, true);
 
-            // Mobile accordion
-            const programTitle = document.getElementById('programTitle');
-            const sectionList = document.getElementById('sectionList');
+        // Media player handling
+        document.addEventListener('click', function(e) {
+            const btn = e.target.closest('.media-control');
+            if (!btn) return;
+            e.preventDefault();
+            e.stopPropagation();
+
+            // Toggle play/pause
+            const isPlaying = btn.textContent === '⏸';
+            btn.textContent = isPlaying ? '▶' : '⏸';
             
-            if (window.innerWidth <= 768 && programTitle) {
-                programTitle.style.cursor = 'pointer';
-                
-                // Remove existing listeners
-                const newProgramTitle = programTitle.cloneNode(true);
-                programTitle.parentNode.replaceChild(newProgramTitle, programTitle);
-                
-                newProgramTitle.addEventListener('click', function(e) {
-                    console.log('Program title clicked');
-                    e.preventDefault();
-                    e.stopPropagation();
-                    e.stopImmediatePropagation();
-                    
-                    newProgramTitle.classList.toggle('expanded');
-                    if (sectionList) {
-                        sectionList.classList.toggle('expanded');
-                    }
-                });
-            }
-        }
-
-        // Prevent all default link behavior
-        function preventDefaultLinks() {
-            // Prevent all links from navigating
-            document.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A' && e.target.href) {
-                    // Only prevent if it's not our interactive elements
-                    if (!e.target.closest('.section-item') && 
-                        !e.target.closest('.play-button') && 
-                        !e.target.closest('.program-title')) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        console.log('Prevented link navigation:', e.target.href);
-                    }
+            if (!isPlaying) {
+                // Load video if not loaded
+                const mediaPlaceholder = document.getElementById('mediaPlaceholder');
+                if (mediaPlaceholder && mediaPlaceholder.innerHTML.includes('Click to load media')) {
+                    mediaPlaceholder.innerHTML = `
+                        <iframe 
+                            src="${moduleData.heroVideo}" 
+                            title="Module intro" 
+                            loading="lazy" 
+                            frameborder="0" 
+                            allowfullscreen
+                            style="width: 100%; height: 100%; border-radius: 0.5rem;">
+                        </iframe>
+                    `;
                 }
-            }, true);
-        }
+            }
+        }, true);
 
         // Initialize
         function init() {
             console.log('Initializing Catz Module...');
-            preventDefaultLinks();
             renderSections();
             renderContent();
-            updateProgress();
-            setupEventListeners();
+            renderProgressCount();
+            
+            // Init UI dari storage
+            const p = getProgress();
+            document.querySelectorAll('.tracker-item').forEach(btn => {
+                const id = btn.dataset.section;
+                const checked = !!p[id];
+                btn.setAttribute('aria-checked', String(checked));
+                btn.classList.toggle('is-checked', checked);
+            });
+            
             console.log('Catz Module initialized successfully');
         }
 
