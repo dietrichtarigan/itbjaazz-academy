@@ -106,6 +106,10 @@
             font-size: 1.25rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
         .play-button:hover {
@@ -261,6 +265,10 @@
             border-bottom: 1px solid var(--gray-200);
             cursor: pointer;
             transition: all 0.3s ease;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
         .section-item:last-child {
@@ -736,6 +744,9 @@
         function setupEventListeners() {
             // Section click handlers
             document.getElementById('sectionList').addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default behavior
+                e.stopPropagation(); // Stop event bubbling
+                
                 const sectionItem = e.target.closest('.section-item');
                 if (!sectionItem) return;
 
@@ -763,7 +774,10 @@
             const progressFill = document.getElementById('progressFill');
             const timeDisplay = document.getElementById('timeDisplay');
 
-            playButton.addEventListener('click', () => {
+            playButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
                 // Toggle play/pause
                 const isPlaying = playButton.textContent === '⏸';
                 playButton.textContent = isPlaying ? '▶' : '⏸';
@@ -792,7 +806,9 @@
             
             if (window.innerWidth <= 768) {
                 programTitle.style.cursor = 'pointer';
-                programTitle.addEventListener('click', () => {
+                programTitle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
                     programTitle.classList.toggle('expanded');
                     sectionList.classList.toggle('expanded');
                 });
