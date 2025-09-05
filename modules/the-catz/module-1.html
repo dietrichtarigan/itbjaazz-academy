@@ -350,10 +350,45 @@
             color: var(--white);
         }
 
-        .section-item.is-checked .section-checkbox::after {
+        /* Interactive Elements - Ensure they're on top and properly isolated */
+        .tracker-item, .accordion-toggle, .media-control {
+            cursor: pointer;
+            position: relative;
+            z-index: 100;
+            pointer-events: auto;
+            touch-action: manipulation;
+        }
+
+        .tracker-item.is-checked .section-checkbox::after {
             content: '✓';
             font-size: 0.75rem;
             font-weight: 600;
+        }
+
+        /* Prevent any nested links or overlays from interfering */
+        .tracker-item *, .accordion-toggle *, .media-control * {
+            pointer-events: none;
+        }
+
+        /* Ensure no anchor elements are accidentally capturing clicks */
+        .program-card a, .section-list a {
+            pointer-events: none;
+        }
+
+        /* Override any global link styles that might interfere */
+        .tracker-item:not(a), .accordion-toggle:not(a), .media-control:not(a) {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Ensure button-like behavior */
+        .tracker-item:focus, .accordion-toggle:focus, .media-control:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        .tracker-item:active, .accordion-toggle:active, .media-control:active {
+            transform: translateY(1px);
         }
 
         .section-text {
@@ -479,6 +514,33 @@
 </head>
 
 <body>
+    <!-- Immediate script to prevent router interference -->
+    <script>
+        // Disable any global click handlers that might cause navigation
+        (function() {
+            const originalAddEventListener = EventTarget.prototype.addEventListener;
+            const protectedSelectors = ['.tracker-item', '.accordion-toggle', '.media-control', '[data-no-router="true"]'];
+            
+            // Override addEventListener to catch and prevent harmful global handlers
+            EventTarget.prototype.addEventListener = function(type, listener, options) {
+                if (type === 'click' && this === document) {
+                    // Wrap the listener to check for protected elements
+                    const wrappedListener = function(e) {
+                        const isProtected = protectedSelectors.some(selector => 
+                            e.target.closest && e.target.closest(selector)
+                        );
+                        if (isProtected) {
+                            return; // Don't call the original listener for protected elements
+                        }
+                        return listener.call(this, e);
+                    };
+                    return originalAddEventListener.call(this, type, wrappedListener, options);
+                }
+                return originalAddEventListener.call(this, type, listener, options);
+            };
+        })();
+    </script>
+
     <!-- Header -->
     <header>
         <div class="container">
@@ -799,22 +861,35 @@
             `;
         }
 
-        // Safe event handling - prevent all navigation for interactive elements
-        document.addEventListener('click', function(e) {
-            const interactive = e.target.closest('.tracker-item, .accordion-toggle, .media-control, [data-no-router="true"]');
+        // Remove any existing global handlers that might cause navigation
+        if (window.__legacyGlobalHandler) {
+            document.removeEventListener('click', window.__legacyGlobalHandler, true);
+            window.__legacyGlobalHandler = undefined;
+        }
+
+        // Safe event handling - prevent all navigation for interactive elements with highest priority
+        const safeInteractionHandler = function(e) {
+            const interactive = e.target.closest('.tracker-item, .accordion-toggle, .media-control, [data-no-router="true"], button[type="button"]');
             if (interactive) {
                 e.preventDefault();
                 e.stopPropagation();
                 e.stopImmediatePropagation?.();
+                return false;
             }
-        }, true); // capture=true agar menang sebelum router
+        };
 
-        // Tracker item handling
-        document.addEventListener('click', function(e) {
+        // Add the safe handler with capture=true and highest priority
+        document.addEventListener('click', safeInteractionHandler, true);
+
+        // Tracker item handling - specific and isolated
+        function handleTrackerClick(e) {
             const item = e.target.closest('.tracker-item');
             if (!item) return;
+            
+            // Prevent all further event propagation
             e.preventDefault();
             e.stopPropagation();
+            e.stopImmediatePropagation?.();
 
             const id = item.dataset.section;
             const p = getProgress();
@@ -825,14 +900,18 @@
             item.classList.toggle('is-checked', p[id]);
 
             safeScrollTo(id);
-        }, true); // capture agar mendahului router manapun
+            return false;
+        }
 
-        // Accordion handling
-        document.addEventListener('click', function(e) {
+        // Accordion handling - specific and isolated
+        function handleAccordionClick(e) {
             const btn = e.target.closest('.accordion-toggle');
             if (!btn) return;
+            
+            // Prevent all further event propagation
             e.preventDefault();
             e.stopPropagation();
+            e.stopImmediatePropagation?.();
 
             const panel = document.getElementById('programPanel');
             const expanded = btn.getAttribute('aria-expanded') === 'true';
@@ -840,14 +919,18 @@
             if (panel) {
                 panel.hidden = expanded;
             }
-        }, true);
+            return false;
+        }
 
-        // Media player handling
-        document.addEventListener('click', function(e) {
+        // Media player handling - specific and isolated
+        function handleMediaClick(e) {
             const btn = e.target.closest('.media-control');
             if (!btn) return;
+            
+            // Prevent all further event propagation
             e.preventDefault();
             e.stopPropagation();
+            e.stopImmediatePropagation?.();
 
             // Toggle play/pause
             const isPlaying = btn.textContent === '⏸';
@@ -869,7 +952,13 @@
                     `;
                 }
             }
-        }, true);
+            return false;
+        }
+
+        // Add handlers with capture=true for early interception
+        document.addEventListener('click', handleTrackerClick, true);
+        document.addEventListener('click', handleAccordionClick, true);
+        document.addEventListener('click', handleMediaClick, true);
 
         // Initialize
         function init() {
@@ -886,6 +975,36 @@
                 btn.setAttribute('aria-checked', String(checked));
                 btn.classList.toggle('is-checked', checked);
             });
+            
+            // Final defensive measure: remove any other click handlers on our interactive elements
+            setTimeout(() => {
+                document.querySelectorAll('.tracker-item, .accordion-toggle, .media-control').forEach(el => {
+                    // Clone the element to remove all other event listeners
+                    const newEl = el.cloneNode(true);
+                    
+                    // Re-add our specific handlers
+                    newEl.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        e.stopImmediatePropagation?.();
+                        
+                        if (newEl.classList.contains('tracker-item')) {
+                            handleTrackerClick(e);
+                        } else if (newEl.classList.contains('accordion-toggle')) {
+                            handleAccordionClick(e);
+                        } else if (newEl.classList.contains('media-control')) {
+                            handleMediaClick(e);
+                        }
+                        
+                        return false;
+                    }, true);
+                    
+                    // Replace in DOM only if not already replaced
+                    if (el.parentNode && el !== newEl) {
+                        el.parentNode.replaceChild(newEl, el);
+                    }
+                });
+            }, 100);
             
             console.log('Catz Module initialized successfully');
         }
